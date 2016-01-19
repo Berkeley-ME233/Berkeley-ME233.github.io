@@ -1,0 +1,201 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ME233 Advanced Control Systems II, UC Berkeley, Spring 2013</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="None" href="#" />
+    <link rel="next" title="Logistics" href="logistics.html" /> 
+  </head>
+  <body>
+
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="logistics.html" title="Logistics"
+             accesskey="N">next</a></li>
+        <li><a href="#">Home </a> |&nbsp;</li>
+        <li><a href="logistics.html">Logistics </a> |&nbsp;</li>
+        <li><a href="outline.html">Syllabus </a> |&nbsp;</li>
+        <li><a href="homework.html">Homework </a> |&nbsp;</li>
+        <li><a href="discussion.html">Discussion </a> |&nbsp;</li>
+        <li><a href="search.html">Search </a> |&nbsp;</li>
+ 
+      </ul>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+          <div class="body">
+            
+  <div class="section" id="me233-advanced-control-systems-ii-uc-berkeley-spring-2013">
+<h1>ME233 Advanced Control Systems II, UC Berkeley, Spring 2013<a class="headerlink" href="#me233-advanced-control-systems-ii-uc-berkeley-spring-2013" title="Permalink to this headline">¶</a></h1>
+<p>ME233 discusses advanced practical control topics, including but not limited to: Linear Quadratic Optimal Control, Kalman Filter, Linear Quadratic Gaussian Problem, Loop Transfer Recovery, System Identification, Adaptive Control and Model Reference Adaptive Systems, Self Tuning Regulators, Repetitive Control, Disturbance Observers.</p>
+<ul class="simple">
+<li><strong>Instructor</strong>: <a class="reference external" href="http://www.me.berkeley.edu/faculty/tomizuka.html">Masayoshi Tomizuka</a>, <a class="reference external" href="http://me.berkeley.edu">Department of Mechanical Engineering</a>, <a class="reference external" href="http://berkeley.edu">UC Berkeley</a>.</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Room 5100B Etcheverry Hall (E.H.), 642 0870, tomizuka AT me DOT berkeley DOT edu</li>
+<li>Office Hours:  Tu and Th 1:00 - 2:00 pm in 5100B E.H.</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><strong>Teaching Assistant</strong>: Xu Chen, <a class="reference external" href="http://me.berkeley.edu">Department of Mechanical Engineering</a>, <a class="reference external" href="http://berkeley.edu">UC Berkeley</a>.</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Room 2103 E.H., 642-0935, maxchen AT me DOT berkeley DOT edu</li>
+<li>Office Hours: Wed 1:00 pm - 2:30 pm in 136 Hesse, F 5:00 pm - 6:00 pm in 1165 E.H. (<a class="reference external" href="http://www.berkeley.edu/map/3dmap/3dmap.shtml">campus map</a>)</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><strong>Lectures</strong>: Tu, Th 11:00 am - 12:30 pm in Room 3109 Etcheverry Hall</li>
+<li><strong>Discussion</strong>: F 4:00-5:00 pm in 1165 Etcheverry Hall</li>
+<li><strong>Class Notes</strong>: ME233 Class Notes (Parts I and II) by M. Tomizuka, Part I can be purchased at Copy Central, 48 Shattuck Square</li>
+<li><strong>Online course schedule</strong>: can be found from <a class="reference external" href="http://schedule.berkeley.edu/">http://schedule.berkeley.edu/</a></li>
+</ul>
+</div>
+<div class="section" id="sitemap">
+<h1>Sitemap<a class="headerlink" href="#sitemap" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="logistics.html">Logistics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="logistics.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logistics.html#grading">Grading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logistics.html#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="outline.html">Tentative Schedule</a></li>
+<li class="toctree-l1"><a class="reference internal" href="homework.html">Homework</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="homework.html#notice">Notice</a></li>
+<li class="toctree-l2"><a class="reference internal" href="homework.html#list-of-homeworks">List of homeworks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="discussion.html">Discussion</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="announcements">
+<h1>Announcements<a class="headerlink" href="#announcements" title="Permalink to this headline">¶</a></h1>
+<ul>
+<li><p class="first">2012-12-05: Final exam schedule:</p>
+<blockquote>
+<div><p>05/16/2013 (Thursday) 8-11am in <a class="reference external" href="http://ets.berkeley.edu/classrooms/gspp">150 GSPP</a>. (Exam Group 13)</p>
+<p>Coverage is all materials discussed during lectures and discussions.</p>
+<p>Open ME233 reader and open notes. Open ME232 reader and your own summary sheets for ME232. You can bring all materials posted on the ME233 course website. You can also bring a calculator and a wristwatch to the exam. Communications between students are not allowed. Cell phones will need to be turned off or put in silent mode, and kept in your bag during the exam.</p>
+</div></blockquote>
+</li>
+</ul>
+<ul>
+<li><p class="first">2013-04-25: <a class="reference internal" href="homework.html#homework"><em>Homework7</em></a> has been posted.</p>
+</li>
+<li><p class="first">2013-04-15: <a class="reference internal" href="homework.html#homework"><em>Homework6</em></a> has been posted.</p>
+</li>
+<li><p class="first">2013-04-08: There will be no lectures on 04-09-2013. A make-up lecture is scheduled to be held in 3111 Etcheverry Hall on Tuesday, April 16, 2013, from <strong>3:30 PM-5:00 PM</strong>. The discussion session and office hour on 04-12-2013 will be canceled.</p>
+</li>
+<li><dl class="first docutils">
+<dt>2013-03-31: Midterm II information:</dt>
+<dd><p class="first">Time: 11:00 am - 12:30 pm, 04/11/2013</p>
+<p>Location: Room 3109 Etcheverry Hall</p>
+<p>Coverage: from the topic after LQG to the end of disturbance observer (excluding the materials in the reader but not discussed in class)</p>
+<p>Closed Reader, closed book, and closed notes</p>
+<p>Two letter-size summary sheets allowed (you can use the space on both sides): one from your summary sheet in Midterm I and another newly prepared for Midterm II</p>
+<p class="last">No calculators or dictionaries; keep your phones in your bag and set them off or in silent mode</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">2013-03-19: tomorrow&#8217;s office hour is canceled.</p>
+</li>
+<li><p class="first">2013-03-18: <a class="reference internal" href="homework.html#homework"><em>Homework5</em></a> has been posted.</p>
+</li>
+<li><p class="first">2013-03-15: a summary of preview control is posted on bSpace. You will need it to do your homework 5. The discussion notes are posted on <a class="reference internal" href="discussion.html#discussion"><em>the discussion page</em></a>.</p>
+</li>
+<li><p class="first">2013-03-08: <a class="reference external" href="_static/errata.pdf">errata</a> of the reader (will be updated periodically)</p>
+</li>
+<li><dl class="first docutils">
+<dt>2013-03-04: Midterm I this week:</dt>
+<dd><p class="first">Time: 11:00 am - 12:30 pm, 03/07/2013</p>
+<p>Location: Room 3109 Etcheverry Hall</p>
+<p>Coverage: from the beginning to the end of LQG</p>
+<p>Closed Reader, closed book, and closed notes</p>
+<p>One letter-size summary sheet will be allowed (you can use the space on both sides)</p>
+<p class="last">No calculators or dictionaries; keep your phones in your bag and set them off or to silent mode</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">2013-02-28: <a class="reference internal" href="homework.html#homework"><em>Homework4</em></a> has been posted.</p>
+</li>
+<li><p class="first">2013-02-21: <a class="reference internal" href="homework.html#homework"><em>Homework3</em></a> has been posted.</p>
+</li>
+<li><p class="first">2013-02-21: on Page KF-11 of the reader (several lines below equation (KF-52)), it should be the square root of 0.01203 instead of 0.01203. In equation (KF-10) on Page KF-3 of the reader, it should be M(0) = E(tilde_x(0|-1)tilde_x(0|-1)^T)=X_0.</p>
+</li>
+<li><p class="first">2013-02-07: <a class="reference internal" href="homework.html#homework"><em>Homework2</em></a> has been posted.</p>
+</li>
+<li><p class="first">2013-02-05: typo in the reader for equation (LS-4) on Page 29: E[ xx&#8217; | y=y_1] should read E[ x&#8217;x | y=y_1 ]. Thanks Daniel.</p>
+</li>
+<li><p class="first">2013-02-01: typo in the reader on page PR-12: the right-hand side of (PR-50C) should be A(t)X(t)+X(t)A(t)^T+Bw(t)W(t)Bw(t)^T. Thanks Daniel, Daewoong, and Cheng-Ju.</p>
+</li>
+<li><p class="first">2013-01-27: <a class="reference internal" href="homework.html#homework"><em>Homework1</em></a> has been posted.</p>
+</li>
+<li><p class="first">2013-01-24: discussion session starts tomorrow (01/25; Friday).</p>
+</li>
+<li><p class="first">2013-01-22: if you don&#8217;t have access to &#8220;ME233 Sp13&#8221; on bSpace, please send the GSI an email with the following information: your name and berkeley email address.</p>
+</li>
+<li><p class="first">2013-01-10: <a class="reference external" href="_static/Probability_Notes_10704.pdf">Probability notes</a> from Professor Poolla</p>
+</li>
+<li><p class="first">2013-01-09: If you need disability-related accommodations in this class, if you have emergency medical information you wish to discuss with the instructor, or if you need special arrangements in case the building must be evacuated, please inform the instructor as soon as possible. Please see the instructor privately after class or in his office.</p>
+</li>
+</ul>
+</div>
+
+
+          </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="logistics.html" title="Logistics"
+             >next</a></li>
+        <li><a href="#">Home </a> |&nbsp;</li>
+        <li><a href="logistics.html">Logistics </a> |&nbsp;</li>
+        <li><a href="outline.html">Syllabus </a> |&nbsp;</li>
+        <li><a href="homework.html">Homework </a> |&nbsp;</li>
+        <li><a href="discussion.html">Discussion </a> |&nbsp;</li>
+        <li><a href="search.html">Search </a> |&nbsp;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Xu Chen and Masayoshi Tomizuka.
+      Last updated on May 01, 2013.
+    </div>
+  </body>
+</html>
