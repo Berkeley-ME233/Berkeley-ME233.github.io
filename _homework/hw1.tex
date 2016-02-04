@@ -1,0 +1,177 @@
+\documentclass[letterpaper,12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[dvips]{graphicx}
+%\usepackage{subfig}
+\usepackage[margin=2.5cm,nohead]{geometry}
+\usepackage{url}
+
+%\input{../commands}
+%\setkeys{Gin}{draft=true}
+%
+%\newtheorem{thm}{Theorem}%[subsection]
+%\newtheorem{lem}[thm]{Lemma}
+%\newtheorem{cor}[thm]{Corollary}
+%\newtheorem{prop}[thm]{Proposition}
+%\newtheorem{remark}[thm]{Remark}
+%\newtheorem*{thm*}{Theorem}
+%\newtheorem*{lem*}{Lemma}
+
+
+
+\begin{document}
+
+\begin{center}
+    {\bf UNIVERSITY OF CALIFORNIA AT BERKELEY}\\
+    {\bf Department of Mechanical Engineering}\\
+    {\bf ME233  Advanced Control Systems II}\\
+    Spring 2016\\
+\end{center}
+\noindent
+{\Large \bf Homework \#1 }\\[-3em]
+\begin{flushright}
+\begin{tabular} {l l}
+    Assigned: &  Feb.\ 4 (Th)\\
+    Due: & Feb.\ 11 (Th)
+\end{tabular}
+\end{flushright}
+
+\begin{enumerate}
+
+%\item
+%For the homework problems in this course that require writing code, you will submit all code you write, including plotting code and any other utilities. You can write in Julia, Python, or Matlab. Other languages may be allowed if you request permission in advance. It is recommended that you familiarize yourself with and try to use an open source language. For code submissions, we will use GitHub.
+
+%\begin{enumerate}
+%\item Sign up for a student account at \url{https://education.github.com} - do this early, it takes several days to get confirmation.
+%\item Once your student account is confirmed, create a \textbf{private} repository called \texttt{ME233HW} under your account.
+%\item Under the repository settings for \url{https://github.com/YOURUSERNAME/ME233HW}, go to Collaborators and add the instructor \texttt{@tkelman} and GSI \texttt{@yujiawu} so we can see your repository.
+%\item Follow an intro GitHub tutorial to learn the basics. If you want to use a GUI interface for Git, the best program to use is called SourceTree \url{https://www.sourcetreeapp.com}.
+%\item Add a new folder called \texttt{HW1} etc in this repository as you work on each new assignment. Make sure the final code is pushed and visible on GitHub by the end of class on the homework due date. Practice committing and pushing your changes to GitHub by working through a tutorial in advance. Next week's office hours can cover this if you need guidance.
+%\end{enumerate}
+
+
+\item
+We wish to determine how to split a positive number $L$ into $N$ pieces, so that the product of the $N$ pieces is maximized. The problem can be solved using dynamic programming by formulating it as follows. Consider a first-order ``pure integrator"
+\begin{align*}
+    x(k+1) = x(k) + u(k),\hspace{3em} x(0) = 0.
+\end{align*}
+We wish to determine the optimal control sequence
+\begin{align*}
+    U_0^o = \{ u^o(0),\,u^o(1),\,\cdots,\, u^o(N-1)\}
+\end{align*}
+such that:
+
+\begin{enumerate}
+    \item
+    $u^o(k) \ge 0$.
+
+    \item
+    $x(N) = L$.
+
+    \item
+    The following cost function is maximized:
+    \begin{align*}
+        J  = \prod_{k=0}^{N-1}\, u (k) = u (0) \,u (1) \,\cdots \, u(N-1)
+    \end{align*}
+\end{enumerate}
+
+To use dynamic programming, it is convenient to define the following optimal value function
+\begin{align*}
+    J_m^o[x(m)]  = \max_{U_m} \prod_{k=m}^{N-1}\, u(k)
+\end{align*}
+where $U_m  = \{ u(m),\,u(m+1),\,\cdots,\, u(N-1)\}$ is the set of all  feasible control sequences from the instance $m$.
+
+\textbf{Hint:} Notice that, because of the terminal condition $x(N) = L$, and the state equation, the optimal value function at $x(N-1)$ is given by
+\begin{align*}
+    J^o[x(N-1)] = u^o(N-1) = L - x(N-1)
+\end{align*}
+Use the Bellman equation starting from this boundary condition to determine an optimal control law for $u^o(k)$.
+
+
+\item
+{\bf Finite-Horizon Optimal Tracking Problem:}
+
+Consider the discrete time system
+\begin{align*}
+    x(k+1) & = A\, x(k) + B \, u(k) \\
+    y(k) & = C\, x(k)
+\end{align*}
+where $x \in \mathbb{R}^n$ and $y, \;u \in \mathbb{R}^m$.
+Assume the existence of a {\em known} reference output sequence
+\begin{align*}
+    \big( y_d(0),\, y_d(1),\, \ldots,\, y_d(N) \big)
+\end{align*}
+
+The optimal control is sought to minimize the finite-horizon quadratic performance index:
+\begin{align*}
+    J & = [ y_d(N) - y(N) ]^T \, \bar{Q}_f \, [ y_d(N) - y(N) ] \\
+    & \quad + \sum_{k=0}^{N-1} \left \{ [ y_d(k) - y(k) ]^T \, \bar{Q} \, [ y_d(k) - y(k) ]
+        + u^T(k) \, R u(k) \right \}
+\end{align*}
+where $\bar{Q}_f$, $\bar{Q}$ and $R$ are symmetric and positive definite matrices of the appropriate
+dimensions. Find the optimal control law by applying dynamic programming and utilizing the
+Bellman equation
+\begin{align*}
+    J_k^o[x(k)] = \min_{u(k)} \left( L[x(k),u(k)] + J_{k+1}^o[x(k+1)] \right)
+\end{align*}
+where
+\begin{align*}
+    L[x(k),u(k)] & = [ y_d(k) - y(k) ]^T \, \bar{Q} \, [ y_d(k) - y(k) ] + u^T(k) R u(k) \\
+    J_N^o[x(N)] & = [ y_d(N) - y(N) ]^T \, \bar{Q}_f \, [ y_d(N) - y(N) ] \; .
+\end{align*}
+\textbf{Hint:} Show that the optimal cost from state $x(k)$ to the final state can be expressed as
+\begin{align*}
+    J_k^o[x(k)] = x^T(k)P(k)x(k) + x^T(k)b(k) + c(k) \:.
+\end{align*}
+Obtain recursive expressions for $P(k)$, $b(k)$, and $c(k)$ (from $k=N$ to $k=0$).
+
+
+
+\item
+A product is produced by three different factories: A, B, and C. Factories A, B, and C respectively produce 25\%, 50\%, and 25\% of the total production. In factories A and B, 98\% of the items produced are not defective, whereas in factory C, 99\% are not defective. Calculate: (a) The probability that a randomly-chosen item is defective and (b) the probability that a (randomly-chosen) non-defective item comes from factory C.
+
+%Hint: Let events $A$, $B$, and $C$ respectively correspond to a randomly-chosen item coming from factory A, factory B, and factory C. Let events $D$ and $N$ respectively correspond to the event that the item is defective and the event that the item is not defective. Then $P(A) = 1/2$, $P(B) = P(C) = 1/4$, $P(D|A) = P(D|B) = 1/100$, and $P(D|C) = 3/100$. Construct an array of probabilities, fill in its entries, and use the definition of conditional probability to compute $P(A|D)$ and $P(C|N)$.
+
+
+\item
+In the ``Monty Hall'' three-door problem, a contestant is asked to choose one of three doors. One of the three doors conceals a prize while the other two do not. After the contestant chooses, Monty Hall (the master of ceremonies of the Let's Make a Deal television show) opens one of the two doors the player did not choose to reveal one door that does not conceal the prize. The contestant is then permitted to either stay with their original choice or switch to the other unopened door. Determine the contestant's probability of getting the prize if she switches. Assume that before Monty Hall opens one of the doors, the prize is equally likely to be hidden behind each of the three doors.
+
+Hint: Let the doors be called $x$, $y$, and $z$. Let $C_x$ be the event that the prize is behind door $x$ and so on. Let $H_x$ be the event that the host opens door $x$ and so on. Assuming that you choose door $x$, the probability that you win a car if you then switch your choice is given by
+\begin{align*}
+    P((H_z \cap C_y) \cup (H_y \cap C_z)) \; .
+\end{align*}
+Notice that, by Bayes' rule, $P(H_z \cap C_y) = P(H_z|C_y) P(C_y)$.
+
+
+%\item
+%A parent has two children. Given that at least one of the children is a boy born on a Tuesday, what is the probability that both children are boys? Assume that, in the absence of the given information, all $14^2=196$ possibilities for the genders of the children and days of the week on which the children were born are equally likely.
+
+
+\item
+Consider a discrete random variable $X$ with probability mass function $p_X(x_1) = a$, $p_X(x_n) = b$, with $p_X(x_i)$ varying linearly between $a$ and $b$ for $1 \leq i \leq n$.
+
+\begin{enumerate}
+\item What are the conditions on $a$ and $b$ to make the above a valid probability mass (density) function? How do these conditions vary with $n$ and the range of possible values of $x$?
+\item What is the expected value and variance of $X$?
+\item What is the CDF $F_X(x)$ ?
+\item If we take the sum of two independent random variables that have this same distribution, what is the probability mass (density) function of their sum?
+\item Write and submit code (in Matlab, Julia, or Python) that implements a function to return a random variable with this distribution, with $a$, $b$, $x_1$ ($x_{\min}$), $x_n$ ($x_{\max}$), and $n$ as inputs. Verify the expected behavior by evaluating this function many times and plotting a histogram for several choices of parameter values - at least one case you plot should have $a \neq b$. (Hint: start with the output of the standard uniform \texttt{rand()} function.)
+\end{enumerate}
+
+Repeat the above steps for a continuous random variable with probability density function $p_X(x_{\min}) = a$, $p_X(x_{\max}) = b$, and $p_X(x)$ varying linearly between $a$ and $b$ for $x_{\min} \leq x \leq x_{\max}$. There is no $n$ in the continuous case.
+
+%Hint: Recall from lecture that, if $X$ and $Y$ are two independent random variables and $Z = X + Y$, then the PDF of $Z$, $p_Z(z)$, is the convolution of the PDF of $X$, $p_X(x)$, and the PDF of $Y$, $p_Y(y)$, i.e.
+%\begin{align*}
+%    p_{_Z}(z) = p_{_X}(\cdot) * p_{_Y}(\cdot) = \int_{-\infty}^\infty p_{_X}(x) p_{_Y}(z-x) dx \; .
+%\end{align*}
+
+
+
+\end{enumerate}
+
+
+\end{document}
+
+
+
