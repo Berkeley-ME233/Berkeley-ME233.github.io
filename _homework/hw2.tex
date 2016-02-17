@@ -1,0 +1,395 @@
+\documentclass[letterpaper,12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[dvips]{graphicx}
+%\usepackage{subfig}
+\usepackage[margin=2.5cm,nohead]{geometry}
+\usepackage{url}
+\usepackage{verbatim}
+
+%\input{../commands}
+%\setkeys{Gin}{draft=true}
+%
+%\newtheorem{thm}{Theorem}%[subsection]
+%\newtheorem{lem}[thm]{Lemma}
+%\newtheorem{cor}[thm]{Corollary}
+%\newtheorem{prop}[thm]{Proposition}
+%\newtheorem{remark}[thm]{Remark}
+%\newtheorem*{thm*}{Theorem}
+%\newtheorem*{lem*}{Lemma}
+
+
+
+\begin{document}
+
+\begin{center}
+    {\bf UNIVERSITY OF CALIFORNIA AT BERKELEY}\\
+    {\bf Department of Mechanical Engineering}\\
+    {\bf ME233  Advanced Control Systems II}\\
+    Spring 2016\\
+\end{center}
+\noindent
+{\Large \bf Homework \#2 }\\[-3em]
+\begin{flushright}
+\begin{tabular} {l l}
+    Assigned: &  Feb.\ 17 (Wed)\\
+    Due: & Feb.\ 23 (Tu)
+\end{tabular}
+\end{flushright}
+
+\begin{enumerate}
+
+%\item
+%For the homework problems in the remainder of this course that require writing code, you will submit all code you write, including plotting code and any other utilities. You can write in Julia, Python, or Matlab. Other languages may be allowed if you request permission in advance. It is recommended that you familiarize yourself with and try to use an open source language. For code submissions, we will use GitHub.
+
+%\begin{enumerate}
+%\item Sign up for a student account at \url{https://education.github.com} - do this early, it takes several days to get confirmation.
+%\item Once your student account is confirmed, create a \textbf{private} repository called \texttt{ME233HW} under your account.
+%\item Under the repository settings for \url{https://github.com/YOURUSERNAME/ME233HW}, go to Collaborators and add the instructor \texttt{@tkelman} and GSI \texttt{@yujiawu} so we can see your repository.
+%\item Follow an intro GitHub tutorial to learn the basics. If you want to use a GUI interface for Git, the best program to use is called SourceTree \url{https://www.sourcetreeapp.com}.
+%\item Add a new folder called \texttt{HW2} etc in this repository as you work on each new assignment. Make sure the final code is pushed and visible on GitHub by the end of class on the homework due date. Practice committing and pushing your changes to GitHub by working through a tutorial in advance. Office hours can cover this if you need guidance.
+%\end{enumerate}
+
+
+\item
+
+A pair of random variables, $X$ and $Y$ have a joint probability density function (PDF)
+    \begin{align*}
+        p_{XY}(x, y) = \begin{cases}
+            1 \ , & 0 \leq y \leq 2x \text{ and } 0 \leq x \leq 1 \\
+            0 \ , & \text{elsewhere}
+        \end{cases}
+    \end{align*}
+
+\begin{enumerate}
+    \item
+    Compute the marginal probability density functions
+    \begin{align*}
+p_Y(y) = \int_{-\infty}^\infty p_{XY}(x, y)dx, \text{ and } p_X(x) = \int_{-\infty}^\infty p_{XY}(x, y)dy
+    \end{align*}
+
+    \item
+    Compute the marginal mean $m_X = E\{X\} = \int_{-\infty}^\infty x p_X(x)dx$.
+
+    \item
+    Compute the marginal variance of $X$.
+    \begin{align*}
+\Lambda_{XX} = \int_{-\infty}^\infty (x - m_X)^2 p_X(x)dx
+    \end{align*}
+
+    \item
+    Obtain an expression for the conditional probability density function $p_{X|Y}(x|y)$, i.e. the conditional PDF of $X$ given the outcome $Y = y$ for $0 \leq y \leq 2$, where
+    \begin{align*}
+p_{X|Y}(x|y) = \frac{p_{XY}(x,y)}{p_Y(y)}
+    \end{align*}
+
+    \item
+    Determine the conditional mean $E\{X | Y=y\}$, i.e. the expected value of $X$ given the outcome $Y = y$ for $0 \leq y \leq 2$.
+
+    \item
+    Determine the conditional mean $E\{X | Y=0.5\}$.
+
+    \item
+    Notice that the conditional mean $E\{X | Y\}$ can be thought of as a function of the random variable $Y$. Therefore, it is itself a random variable. Introducing the notation
+    \begin{align*}
+m_{X|Y}(Y) = E\{X | Y\} = \int_{-\infty}^\infty x p_{X|Y}(x|Y)dx,
+    \end{align*}
+prove that the expected value of the conditional mean $m_{X|Y}(Y)$ is equal to the marginal mean of $X$, i.e.
+    \begin{align*}
+E\{m_{X|Y}(Y)\} = \int_{-\infty}^\infty m_{X|Y}(y)p_Y(y)dy = m_X = \int_{-\infty}^\infty x p_X(x)dx.
+    \end{align*}
+Verify this result by computing $E\{m_{X|Y}(Y)\}$ and comparing it to $m_X$ for the example above.
+
+    \item
+    Compute the variance of the conditional mean $m_{X|Y}(Y)$ for the example above.
+    \begin{align*}
+\Lambda_{m_{X|Y} m_{X|Y}} = \int_{-\infty}^\infty (m_{X|Y}(y) - m_X)^2 p_Y(y) dy
+    \end{align*}
+You should find that $\Lambda_{m_{X|Y} m_{X|Y}} < \Lambda_{XX}$.
+
+    \item
+    Obtain an expression for the conditional variance of $X$ given $Y$
+    \begin{align*}
+\Lambda_{X|Y X|Y}(Y) = E\{(X - m_{X|Y}(Y))^2 | Y\} = \int_{-\infty}^\infty (x - m_{X|Y}(Y))^2 p_{X|Y}(x|Y) dx
+    \end{align*}
+for the example above. Notice that the conditional variance of $X$ given $Y$, $\Lambda_{X|Y X|Y}(Y)$ is also a random variable.
+
+    \item
+    Finally, compute the expected value of the conditional variance of $X$ given $Y$,
+    \begin{align*}
+E\{\Lambda_{X|Y X|Y}(Y)\} = \int_{-\infty}^\infty \Lambda_{X|Y X|Y}(y) p_{Y}(y) dy
+    \end{align*}
+for the example above and verify that
+    \begin{align*}
+\Lambda_{XX} = \Lambda_{m_{X|Y} m_{X|Y}} + E\{\Lambda_{X|Y X|Y}(Y)\}.
+    \end{align*}
+
+
+\end{enumerate}
+
+
+
+
+\item
+Consider the stochastic system
+\begin{align}
+    \label{eq:1}
+    Y(k) - 0.5 Y(k-1) = W(k) - 0.3 W(k-1)
+\end{align}
+where $W(k)$ is a wide sense stationary (WSS) zero mean white random sequence with unit variance, i.e.
+\begin{align*}
+    m_{_W} = 0 \hspace{2em} \Lambda_{_{WW}}(l)  = E\{W(k+l)W(k)\} = \delta(l)
+\end{align*}
+and $\delta(l)$ is the unit pulse function. In this problem, we will compare the theoretical value of the relevant covariances with empirical estimates of those quantities computed in a simulation.
+\footnote{Since you will require an initial condition to perform time simulations, the output of the system given by Eq.~\eqref{eq:1} will not, strictly speaking be WSS. However, if the length of the sample sequence is taken to be sufficiently long, the relevant quantities will be approximately given by time averages.}
+
+\begin{enumerate}
+
+\item
+Do a numerical simulation (in Matlab, Python, or Julia) of the response of this system for one sample sequence $w(k)$ :
+
+\begin{enumerate}
+    \item
+    Generate the sample sequence $w(k)$ using {\tt w = randn(N,1) } or equivalent, where {\tt N} is a large number (e.g. 5000).
+
+    \item
+    Generate the sample output sequence $y(k)$ by propagating the system dynamics over time with a for loop.
+
+%    \begin{center}
+%        \verb|[y,k] = lsim(sys1,w,k);|
+%    \end{center}
+%    Notice that the vector {\tt k} must be defined.
+
+    \item
+    Generate and plot the estimates of the covariances and cross-covariances $\Lambda_{WW}(j)$, $\Lambda_{WY}(j)$,  $\Lambda_{YW}(j)$, $\Lambda_{YY}(j)$, for $j = \{-10,\, -9,\, \cdots ,0,\, \cdots \,10\}$. %using the matlab command {\tt xcov}, e.g.\
+
+%    \begin{center}
+%        \verb|cov_wy = xcov(w,y,10,'coeff');|
+%    \end{center}
+%    Read the help on  {\tt xcov}  to understand what the argument {\tt 'coeff'} does.
+%    \footnote{The MATLAB function {\tt xcov} is part of the signal processing toolbox. Those of you who do not have access to this toolbox can use a similar function that can be downloaded from the ME233 bSpace website.}
+\end{enumerate}
+
+\item
+Determine the cross-covariance (cross-correlation) function
+\begin{align*}
+    \Lambda_{YW}(l) = E\{Y(k+l)W(k)\}
+\end{align*}
+and $\hat{\Lambda}_{YW}(z) = \sum_{l=-\infty}^{\infty} z^{-l} \Lambda_{YW}(l)$. Plot $\Lambda_{YW}(l)$ for $l = \{-10,\, -9,\, \cdots ,0,\, \cdots \,10\}$ and compare the results with those empirically obtained from your simulation. Notice that $\Lambda_{YW}(l)$ is a causal sequence, i.e. $\Lambda_{YW}(l) = 0$ for $ l < 0$ and all the poles of $\hat{\Lambda}_{YW}(z)$ will be inside the unit circle.
+
+\item
+Determine the cross-covariance (cross-correlation) function
+\begin{align*}
+    \Lambda_{WY}(l) = E\{W(k+l)Y(k)\}
+\end{align*}
+and $\hat{\Lambda}_{WY}(z) = \sum_{l=-\infty}^{\infty} z^{-l} \Lambda_{WY}(l)$. Plot $\Lambda_{WY}(l)$ for $l = \{-10,\, -9,\, \cdots ,0,\, \cdots \,10\}$ and compare the results with those empirically obtained from your simulation. Notice that $\Lambda_{WY}(l)$ is an anti-causal sequence, i.e. $\Lambda_{WY}(l) = 0$ for $ l > 0$ and all the poles of $\hat{\Lambda}_{WY}(z)$ will be outside the unit circle.
+
+%\item
+%Determine the spectral density function
+%\begin{align*}
+%    \Phi_{_{YY}}(\omega) = \Lambda_{_{YY}}(z)|_{z = e^{j\omega}}
+%\end{align*}
+%of the random sequence $Y(k)$ and plot $\Phi_{_{YY}}(\omega)$ as a function of $\omega \in [-\pi,\,\pi]$.
+
+\item
+Determine the auto-covariance (auto-correlation) function
+\begin{align*}
+    \Lambda_{YY}(l) = E\{Y(k+l)Y(k)\}
+\end{align*}
+and $\hat{\Lambda}_{YY}(z) = \sum_{l=-\infty}^{\infty} z^{-l} \Lambda_{YY}(l)$. Plot $\Lambda_{YY}(l)$ for $l = \{-10,\, -9,\, \cdots ,0,\, \cdots \,10\}$ and compare the results with those empirically obtained from your simulation. Notice that $\hat{\Lambda}_{YY}(z)$ will have poles both outside and inside the unit circle.
+
+%\textbf{Hint:} After finding $\hat{\Lambda}_{YY}(z)$, find its inverse Z-transform using the results of problem 1.
+
+\item
+Compute $\Lambda_{_{YW}}(0)$ utilizing Eq.~\eqref{eq:1}.
+
+\textbf{Hint:} Multiply both sides of Eq.~\eqref{eq:1} by $W(k)$ and take expectations.
+
+\item
+Compute $\Lambda_{_{YW}}(1)$ utilizing Eq.~\eqref{eq:1}.
+
+\textbf{Hint:} Multiply both sides of Eq.~\eqref{eq:1} by $W(k-1)$ and take expectations.
+
+
+\item
+Compute $\Lambda_{_{YY}}(0)$ utilizing equation \eqref{eq:1}.
+
+\textbf{Hint:} From Eq.~\eqref{eq:1} we have
+\begin{align}
+    \label{eq:2}
+    Y(k) =  0.5 Y(k-1)+ W(k) - 0.3 W(k-1) \; .
+\end{align}
+Square both sides of Eq.~\eqref{eq:2} and take expectations.
+
+\end{enumerate}
+
+
+\begin{comment}
+\item
+Consider a second order discrete time system described by
+\begin{align*}
+    \begin{bmatrix}
+            X_1(k+1) \\
+            X_2(k+1)
+        \end{bmatrix} & = \begin{bmatrix}
+            -0.08 & -1 \\
+            0.7 & 0.1
+        \end{bmatrix} \begin{bmatrix}
+            X_1(k) \\
+            X_2(k)
+        \end{bmatrix} + \begin{bmatrix}
+            0.34 \\
+            0.3
+        \end{bmatrix} W(k) \\
+    Y(k) & = \begin{bmatrix}
+            0 & 3
+        \end{bmatrix} \begin{bmatrix}
+            X_1(k) \\
+            X_2(k)
+        \end{bmatrix} + V(k)
+\end{align*}
+where
+\begin{itemize}
+    \item
+    $E \{ X(0) \} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}$ and $E \{ X(0) X^T(0) \} = \begin{bmatrix} 0.1 & 0 \\ 0 & 0.1 \end{bmatrix}$
+
+    \item
+    $W(k)$ and $V(k)$ are white Gaussian sequences
+
+    \item
+    $m_{w} = E \{ W(k) \} = 10, \quad E \{ V(k) \} = 0$
+
+    \item
+    $E \left\{ \begin{bmatrix}
+        W(k+j) - m_w  \\
+        V(k+j)
+    \end{bmatrix} \begin{bmatrix}
+        (W(k) - m_w) &
+        V(k)
+    \end{bmatrix} \right\} = \begin{bmatrix}
+        \Sigma_{ww} & 0 \\
+        0 & \Sigma_{vv}
+    \end{bmatrix} \delta(j)$ where \newline
+    $\Sigma_{ww} = 1$ and $\Sigma_{vv} = 0.5$.
+
+    \item
+    $E \left\{ \begin{bmatrix}
+        W(k) - m_w  \\
+        V(k)
+    \end{bmatrix} X^T(0) \right\} = 0$
+
+\end{itemize}
+
+\begin{enumerate}
+    \item
+    Use MATLAB to  plot $m_y(k) = E\{Y(k) \}$ for $k=0,\,1,\,\ldots$ until $m_y(k)$ reaches its steady state value $\bar m_y$.
+
+    \item
+    Using MATLAB, compute
+    \begin{align*}
+        \Lambda_{XX}(k,0) = E\{ (X(k) - m_{_X}(k))(X(k) - m_{_X}(k))^T\}
+    \end{align*}
+    utilizing the covariance propagation Lyapunov equation and plot
+    \begin{align*}
+        \Lambda_{YY}(k,0) = E\{(Y(k)-m_{_{Y}}(k))^2 \}
+    \end{align*}
+    for $k=0,\,1,\,\ldots$ until $\Lambda_{YY}(k,0)$ reaches its steady state value $\bar \Lambda_{YY}(0)$.
+
+    \item
+    Using MATLAB, compute
+    \begin{align*}
+        \Lambda_{XX}(k,5) = E\{ (X(k+5) - m_x(k+5))(X(k) - m_x(k))^T\}
+    \end{align*}
+    and plot
+    \begin{align*}
+        \Lambda_{YY}(k,5) = E\{(Y(k+5)-m_y(k+5))(Y(k)-m_y(k)) \}
+    \end{align*}
+    for $k=0,\,1,\,\ldots$, until it reaches its steady state value $\bar \Lambda_{YY}(5)$.
+
+    \item
+    Use the MATLAB function {\tt dlyap} to compute $\bar \Lambda_{XX}(0)$. Then compute and plot the steady state covariances $\bar \Lambda_{YY}(j)$ for $j=\{-10,\,-9,\, \cdots,\, 0,\, 1,\,\cdots 10\}$.
+
+    \item
+    Let $G(z) = C (z I - A)^{-1} B$ be the transfer function from $W$ to $Y$.
+    %so that
+%    \begin{align*}
+%        \mathcal{Z}\{Y(k)\} = G(z) \mathcal{Z}\{W(k)\} + \mathcal{Z}\{V(k)\} \; .
+%    \end{align*}
+    Obtain an expression for the (steady state) output spectral density,  $\Phi_{YY}(\omega)$ in terms of $G$, $\Sigma_{ww}$ and $\Sigma_{vv}$. (Do not explicitly determine $G(z)$ or substitute in the numerical values for $\Sigma_{ww}$ and $\Sigma_{vv}$ in this problem.)
+
+    \item
+    Use MATLAB to plot the output spectral density $\Phi_{YY}(\omega)$ for $\omega \in [-\pi,\,\pi]$.
+
+\end{enumerate}
+\end{comment}
+
+
+\item
+Let $X \sim N(10,2)$, $V_1 \sim N(0,1)$ and $V_2 \sim N(0,2)$ be independent random variables. Assume that you are trying to make a measurement of $X$ with two different instruments. Let  $Y = X + V_1$ be the measurement of $X$ using the first instrument and $Z = X + V_2$ be the measurement of $X$ using the second instrument, where $V_1$ and $V_2$ are respectively the measurement noises of the first and second instruments.
+
+\begin{enumerate}
+
+\item
+Determine $m_{_{X|Y=9}}$, i.e. the conditional expectation of $X$ given that the first instrument yielded the measurement $Y=9$.
+
+\item
+Determine $m_{_{X|Z=11}}$, i.e. the conditional expectation of $X$ given that the second instrument yielded the measurement $Z=11$.
+
+\item
+Determine $m_{_{X|(Y=9,Z=11)}}$, i.e. the conditional expectation of $X$ given that the first and second instruments respectively yielded the measurements $Y=9$ and $Z=11$.
+
+\end{enumerate}
+
+
+
+\item
+A random variable $X$ is repeatedly measured, but the measurements are noisy.  Assume that the measurement process can be described by
+\begin{equation*}
+    Y(k) = X + V(k)
+\end{equation*}
+where $X, V(0), V(1), V(2), \ldots$ are jointly Gaussian random variables with
+\begin{align*}
+    E \{ X \} & = 0
+        & E \{ X^2 \} & = X_0 \\
+    E \{ V(k) \} & = 0
+        & E \{ V(k+j) V(k) \} & = \Sigma_{_{V}} \delta(j) \\
+    E \{ X V(k) \} & = 0 \; .
+\end{align*}
+Let $y(k)$ be the k-th measurement (i.e. outcome of $Y(k)$) and let $\bar{y}(k) = \{ y(0),\ldots,y(k) \}$.
+
+\begin{enumerate}
+
+\item
+Obtain the least squares estimate of $X$ given the $k+1$ measurements $y(0), \ldots, y(k)$ and the corresponding estimation error covariance, i.e.\ find $\hat{x}_{|\bar{y}(k)}$ and $\Lambda_{\tilde{X}_{|\bar{y}(k)} \tilde{X}_{|\bar{y}(k)}}$.
+
+\textbf{Hint:} You do not need to invert a $(k+1) \times (k+1)$ matrix to find these quantities. Instead express
+\begin{align*}
+    \Lambda_{\bar{y}(k) \bar{y}(k)} = A + uv^T
+\end{align*}
+where $A$ is a matrix that is easy to invert and $u$ and $v$ are vectors. In this case, the matrix inversion lemma says that
+\begin{align*}
+    \Lambda_{\bar{y}(k) \bar{y}(k)}^{-1} %& = A^{-1} - A^{-1} u (I + v^T A^{-1} u)^{-1} v^T A^{-1} \\
+    & = A^{-1} - \frac{1}{1+v^T A^{-1} u} A^{-1} u v^T A^{-1} \; .
+\end{align*}
+
+\item
+We now examine the case when $X_0  \to \infty$, i.e. when no prior information is available on $X$. Show the following:
+\begin{gather*}
+    \lim_{X_0  \to \infty} \left( \hat{x}_{_{|\bar{y}(k)}} \right)
+        = \frac{1}{k+1}\, [ y(0) + y(1) + \cdots + y(k) ] \\
+    \lim_{X_0  \to \infty} \left( \Lambda_{_{\tilde{X}_{|\bar{y}(k)} \tilde{X}_{|\bar{y}(k)}}} \right)
+        = \frac{\Sigma_{_V}}{k+1} \; .
+\end{gather*}
+
+\end{enumerate}
+
+
+
+\end{enumerate}
+
+
+\end{document}
+
+
+
