@@ -1,0 +1,46 @@
+307 Patch Control
+
+0
+0
+1
+0-Minimum Variance Regulator.tex
+7
+7
+6
+
+
+
+
+
+
+0-Minimum Variance Regulator.tex
+TeX
+152055803 0 9 26 -1 36 0 0 978 371 0 313 0 -1 -1 0 0 36 -1 -1 36 1 0 36 -1   0
+1-intro.tex
+TeX
+1060859 0 -1 1669 -1 0 25 25 1003 396 0 25 0 -1 -1 0 0 22 -1 -1 22 1 0 0 -1   0
+2-problem.tex
+TeX
+1060859 5 -1 758 -1 759 150 150 1128 521 0 73 459 -1 -1 0 0 31 -1 -1 31 1 0 759 -1   0
+3-solution.tex
+TeX
+17838075 5 -1 2027 -1 2039 0 0 978 371 0 25 272 -1 -1 0 0 22 -1 -1 22 1 0 2039 -1   0
+4-proof_stablezeros.tex
+TeX
+1060859 0 -1 4167 -1 4173 25 25 1003 396 0 305 1037 -1 -1 0 0 53 -1 -1 53 1 0 4173 -1   0
+5-acausal.tex
+TeX
+1060859 0 110 26 -1 0 100 100 893 493 0 25 0 -1 -1 0 0 35 -1 -1 35 1 0 0 -1   0
+6-proof_general.tex
+TeX
+286273531 0 -1 8366 -1 8730 25 25 1003 396 0 393 408 -1 -1 0 0 29 -1 -1 29 1 0 8730 -1   0
+
+*0-Minimum Variance Regulator.tex
+>
+*1-intro
+*2-problem
+*3-solution
+*4-proof_stablezeros
+*5-acausal
+*6-proof_general
+<

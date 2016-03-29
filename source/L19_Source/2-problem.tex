@@ -1,0 +1,31 @@
+\section{MVR Problem Statement}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Minimum Variance Regulator (MVR) Problem}
+
+    Given the ARMAX model
+    \begin{align*}
+        A(q^{-1}) y(k) = \qmd B(q^{-1}) u(k) + C(q^{-1}) \epsilon(k)
+    \end{align*}
+    where
+    \begin{itemize}
+        \item
+        $C(q^{-1})$ is an anti-Schur polynomial of $q^{-1}$
+
+        \item
+        $B(q^{-1})$ has no zeros on the unit circle
+
+        \item
+        $\epsilon(k)$ is zero-mean white noise
+        
+        \item
+        The plant has no unstable pole-zero cancelations, i.e.\ the polynomials $A(q^{-1})$ and $B(q^{-1})$ have no common zeros such that $|q^{-1}| < 1$
+    \end{itemize}
+    \pause
+    
+    find the stabilizing feedback control law that minimizes the output variance $E\{y^2(k)\}$
+\end{frame}

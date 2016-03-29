@@ -1,0 +1,169 @@
+\section{MVR Solution}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Factorization of $B$ and $\bar{B}$}
+
+    In general, the polynomial $\bar{B}(q) = q^m B(q^{-1})$ has
+    \begin{itemize}
+        \item
+        $m_s$ zeros strictly inside the unit circle (stable plant zeros)
+
+        \item
+        $m_u$ zeros strictly outside the unit circle (unstable plant zeros)
+    \end{itemize}
+    \pause
+
+    Perform the factorization
+    \begin{align*}
+        B(q^{-1}) = B^s(q^{-1}) B^u(q^{-1})
+    \end{align*}
+    where
+    \begin{itemize}
+        \item
+        $\bar{B}^s(q) = q^{m_s} B^s(q^{-1})$ has its zeros inside the unit circle \\
+        (These are the stable plant zeros)
+
+        \item
+        $\bar{B}^u(q) = q^{m_u} B^u(q^{-1})$ has its zeros outside the unit circle \\
+        (These are the unstable plant zeros)
+
+        \item
+        $\bar{B}^u(0) = 1$
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Minimum Variance Regulator (MVR) Solution}
+
+    \begin{itemize}
+        \item
+        The optimal control $u_*(k)$ is given by
+        \begin{align*}
+            B^s(q^{-1}) R(q^{-1}) u_*(k) = - S(q^{-1}) y(k)
+        \end{align*}
+        where $R(q^{-1})$ and $S(q^{-1})$ are found by solving the Diophantine equation
+        \begin{align*}
+            C(q^{-1}) \bar{B}^u(q^{-1}) = A(q^{-1}) R(q^{-1}) + \qmd B^u(q^{-1}) S(q^{-1})
+        \end{align*}
+        where
+        \begin{align*}
+            R(q^{-1}) & = 1 + r_1 q^{-1} + \cdots + r_{n_r} q^{-n_r} \\
+            S(q^{-1}) & = s_0 + s_1 q^{-1} + \cdots + s_{n_s} q^{-n_s}
+        \end{align*}
+        and $n_r = m_u + \drm - 1$ and $n_s = n-1$
+
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Minimum Variance Regulator (MVR) Solution}
+
+    \begin{itemize}
+        \item
+        The optimal cost is 
+        \begin{align*}
+            E\{y^2(k)\} = E\{\epsilon_f^2(k)\} 
+        \end{align*}
+        where $\epsilon_f(k)$ is defined in terms of $\epsilon(k)$ by the ARMA model
+        \begin{align*}
+            \bar{B}^u(q^{-1}) \epsilon_f(k) = R(q^{-1}) \epsilon(k)
+        \end{align*}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Constructing the MVR}
+
+    \begin{enumerate}
+        \item
+        Find $\hat{L}$ using a stationary Kalman filter design
+
+        \item
+        Construct $C(q^{-1}) = q^{-n} \det[qI - (\hat{A} - \hat{L}\hat{C})]$
+
+        \item
+        Factor $B(q^{-1}) = B^s(q^{-1}) B^u(q^{-1})$ as described previously \\
+        (don't forget that $\bar{B}^u(0) = 1$)
+
+        \item
+        Solve the Diophantine equation
+        \begin{align*}
+            C(q^{-1}) \bar{B}^u(q^{-1}) = A(q^{-1}) R(q^{-1}) + \qmd B^u(q^{-1}) S(q^{-1})
+        \end{align*}
+
+        \item
+        Form the optimal controller
+        \begin{align*}
+            B^s(q^{-1}) R(q^{-1}) u_*(k) = - S(q^{-1}) y(k)
+        \end{align*}
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Solution Comments}
+
+    \begin{itemize}
+        \item
+        Be careful with $B^u(q^{-1})$, $\bar{B}^u(q)$, and $\bar{B}^u(q^{-1})$
+        \pause
+
+        \begin{itemize}
+            \item
+            $B^u(q^{-1})$ is a Schur polynomial in $q^{-1}$
+            \pause
+
+            \item
+            $\bar{B}^u(q)$ is an anti-Schur polynomial in $q$
+            \pause
+
+            \item
+            $\bar{B}^u(q^{-1})$ is an anti-Schur polynomial in $q^{-1}$
+        \end{itemize}
+        \pause
+
+        \item
+        Note that the Diophantine equation involves both $B^u(q^{-1})$ and $\bar{B}^u(q^{-1})$.
+        \pause
+
+        \item
+        Since $\bar{B}^u(q^{-1})$ is anti-Schur, the operator $\displaystyle{\frac{R(q^{-1})}{\bar{B}^u(q^{-1})}}$ is BIBO.
+        \paused
+        $\displaystyle{\Rightarrow \quad \epsilon_f(k) = \frac{R(q^{-1})}{\bar{B}^u(q^{-1})} \epsilon(k)}$ has bounded covariance
+
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Special Case: $B(q^{-1})$ is anti-Schur}
+
+    When $B(q^{-1})$ is anti-Schur, we have
+    \begin{itemize}
+        \item
+        $B^s(q^{-1}) = B(q^{-1})$
+
+        \item
+        $B^u(q^{-1}) = \bar{B}^u(q) = \bar{B}^u(q^{-1}) = 1$
+        \pause
+
+        \item
+        Expressing $R(q^{-1}) = 1 + r_1 q^{-1} + \cdots + r_{n_r} q^{-n_r}$, the optimal cost is
+        \begin{align*}
+            E\{y^2(k)\}
+            & = E\{[R(q^{-1})\epsilon(k)]^2\} \\
+            & = E\{[\epsilon(k) + r_1 \epsilon(k-1) + \cdots + r_{n_r} \epsilon(k-n_r)]^2 \} \\
+            & = E\{\epsilon^2(k)\} + r_1^2 E\{\epsilon^2(k-1)\} + \cdots + r_{n_r}^2 E\{\epsilon^2(k-n_r)\} \\
+            & = (1 + r_1^2 + \cdots + r_{n_r}^2) E\{\epsilon^2(k)\}
+        \end{align*}
+        \pause
+        Therefore
+        \alignbox{
+            E\{y^2(k)\} = (1 + r_1^2 + \cdots + r_{n_r}^2) (\hat{C}M\hat{C}^T + V)
+        }
+
+    \end{itemize}
+\end{frame}

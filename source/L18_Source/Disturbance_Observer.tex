@@ -1,0 +1,47 @@
+\documentclass[mathserif]{beamer}              %use this for creating the presentation
+%\documentclass[handout,mathserif]{beamer}       %use this for creating the handout (i.e. no animation)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+%\usepackage{subfig}
+
+\usecolortheme{orchid}
+
+\newcommand{\alignbox}[1]
+    {\begin{equation*} \boxed{ \begin{aligned} #1
+    \end{aligned} } \end{equation*}}
+\newcommand{\gatherbox}[1]
+    {\begin{equation*} \boxed{ \begin{gathered} #1
+    \end{gathered} } \end{equation*}}
+\newcommand{\ejw}{e^{j\omega}}
+\newcommand{\paused}{\vspace*{-\baselineskip}\pause}     %use this if \pause puts too much space before the next line
+
+%\input{../commands}
+%\setkeys{Gin}{draft=true}
+
+\setlength{\parskip}{10pt plus 1pt minus 1pt}
+
+\title{ME 233 -- Advanced Control II\\
+    Lecture 16 \\
+    Disturbance Observers}
+\author{Tony Kelman}
+\institute{UC Berkeley}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents
+\end{frame}
+
+\input{1-motivation}
+\input{2-do}
+\input{3-dynamics}
+\input{4-Qdesign}
+\input{5-addDO}
+
+\end{document} 

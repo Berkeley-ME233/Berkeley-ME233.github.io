@@ -1,0 +1,6 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{Motivation}{3}{0}{1}
+\beamer@sectionintoc {2}{Disturbance observer}{18}{0}{2}
+\beamer@sectionintoc {3}{Derivation of closed-loop dynamics}{24}{0}{3}
+\beamer@sectionintoc {4}{Choosing Q(z)}{36}{0}{4}
+\beamer@sectionintoc {5}{Adding a disturbance observer to an existing feedback controller}{43}{0}{5}

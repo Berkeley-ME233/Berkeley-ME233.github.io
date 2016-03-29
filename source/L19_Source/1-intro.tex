@@ -1,0 +1,139 @@
+\section{Introduction}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Model Form}
+
+    We consider a state space model of the form
+    \begin{align*}
+        x(k+1) & = \hat{A} x(k) + \hat{B} u(k) + \hat{B}_w w(k) \\
+        y(k) & = \hat{C} x(k) + v(k)
+    \end{align*}
+    where
+    \begin{itemize}
+        \item
+        $u(k)$ is the \textbf{scalar} control signal
+
+        \item
+        $y(k)$ is the \textbf{scalar} measurement signal
+
+        \item
+        $w(k)$ is the input noise \\
+        (white, zero-mean, $E\{w(k) w^T(k)\} = W$)
+
+        \item
+        $v(k)$ is the measurement noise \\
+        (white, zero-mean, $E\{v(k) v^T(k)\} = V$)
+
+        \item
+        $E\{w(k) v^T(k) \} = 0$
+
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Stationary Kalman Filter V2 (Review)}
+
+    The optimal state estimator is given by
+    \begin{align*}
+        \hat{x}^o(k+1) & = \hat{A} \hat{x}^o(k) + \hat{B} u(k) + \hat{L} \tilde{y}^o(k) \\
+        \tilde{y}^o(k) & = y(k) - \hat{C} \hat{x}^o(k)
+    \end{align*}
+    where
+    \begin{align*}
+        & \hat{L} = \hat{A} M \hat{C}^T [\hat{C} M \hat{C}^T + V]^{-1} \\
+        & M = \hat{A} M \hat{A}^T + \hat{B}_w W \hat{B}_w^T
+            - \hat{A} M \hat{C}^T [\hat{C} M \hat{C}^T + V]^{-1} \hat{C} M \hat{A}^T \\
+        & \hat{A} - \hat{L}\hat{C} \textrm{ is Schur}
+    \end{align*}
+    \paused
+
+    Also, the signal $\tilde{y}^o(k)$ is zero-mean, white, and has covariance $\hat{C} M \hat{C}^T + V$.
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Alternate Model Form}
+
+    Using the Kalman Filter V2, we can write
+    \begin{align*}
+        \hat{x}^o(k+1) & = \hat{A} \hat{x}^o(k) + \hat{B} u(k) + \hat{L} \epsilon(k) \\
+        y(k) & = \hat{C} \hat{x}^o(k) + \epsilon(k)
+    \end{align*}
+    where $\epsilon(k) = \tilde{y}^o(k)$.
+    \pause
+
+    As a transfer function, this is
+    \begin{align*}
+        Y(z) & = [\hat{C} (zI - \hat{A})^{-1} \hat{B}] U(z) \\
+        & \quad + [1 + \hat{C} (zI - \hat{A})^{-1} \hat{L}] E(z)
+    \end{align*}
+    \paused
+
+    Recall that $\displaystyle{ 1 + \hat{C} (zI - \hat{A})^{-1} \hat{L} = \frac{\det[zI-(\hat{A}-\hat{L}\hat{C})]}{\det[zI-\hat{A}]} }$
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Alternate Transfer Function Model}
+
+    From the previous slide, we have that
+    \begin{align*}
+        Y(z) & = \frac{\bar{B}(z)}{\bar{A}(z)} U(z) + \frac{\bar{C}(z)}{\bar{A}(z)} E(z)
+    \end{align*}
+    \paused
+
+    where
+    \begin{align*}
+        \bar{A}(z) & = z^n + a_1 z^{n-1} + \cdots + a_n && = \det[zI-\hat{A}] \\
+        \bar{C}(z) & = z^n + c_1 z^{n-1} + \cdots + c_n && = \det[zI-(\hat{A}-\hat{L}\hat{C})] \\
+        \bar{B}(z) & = b_0 z^m + \cdots + b_m
+    \end{align*}
+    \paused
+
+    Since $\hat{A}-\hat{L}\hat{C}$ is Schur, the polynomial $\bar{C}(z)$ is Schur
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Polynomials in $q^{-1}$}
+
+    We now define $\drm = n - m$ and the polynomials
+    \begin{align*}
+        A(z^{-1}) & = z^{-n} \bar{A}(z) && = 1 + a_1 z^{-1} + \cdots + a_n z^{-n} \\
+        C(z^{-1}) & = z^{-n} \bar{C}(z) && = 1 + c_1 z^{-1} + \cdots + c_n z^{-n} \\
+        B(z^{-1}) & = z^{-m} \bar{B}(z) && = b_0 + b_1 z^{-1} + \cdots + b_m z^{-m} \\
+    \end{align*}
+    \paused
+
+    so that we can write the transfer function from the previous slide as
+    \begin{align*}
+        Y(z) & = \frac{z^{-\drm} B(z^{-1})}{A(z^{-1})} U(z) + \frac{C(z^{-1})}{A(z^{-1})} E(z)
+    \end{align*}
+    \paused
+
+    Note in particular that $C(z^{-1})$ is an anti-Schur polynomial of $z^{-1}$
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{ARMAX Plant Model}
+
+    We have now transformed the original state space plant model to
+    \begin{align*}
+        A(q^{-1}) y(k) = \qmd B(q^{-1}) u(k) + C(q^{-1}) \epsilon(k)
+    \end{align*}
+    where $C(q^{-1})$ is an anti-Schur polynomial of $q^{-1}$ and $\epsilon(k)$ is zero-mean white noise with covariance $\hat{C} M \hat{C}^T + V$
+    \pause
+
+    \vspace{4ex}
+
+    This type of model is called an \underline{ARMAX} model because it is an ARMA model with an eXogenous input.
+
+\end{frame}
+
+
+

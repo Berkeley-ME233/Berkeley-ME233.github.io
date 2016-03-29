@@ -1,0 +1,253 @@
+\section{Proof, Special Case: $B(q^{-1})$ Anti-Schur}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Proof Methodology}
+
+    The proof will be done in 4 parts:
+
+    \begin{enumerate}
+        \item
+        Rewrite the system dynamics in a more convenient form
+        \pause
+
+        \item
+        Prove that $E\{z(k-\drm) \epsilon_f(k)\} = 0$, where $z(k)$ is a sequence to be defined in subsequent slides
+        \pause
+
+        \item
+        Prove optimality of proposed control scheme
+        \pause
+
+        \item
+        Verify closed-loop stability
+
+    \end{enumerate}
+    \pause
+
+    Comments on the notation in this proof:
+    \begin{itemize}
+        \item
+        Capital letters always denote polynomials; lower case letters denote sequences (except $\drm$ and $q$)
+
+        \item
+        Dependency of polynomials on $q^{-1}$ will be omitted\\
+        e.g. $\bar{B}^u$ will refer to $\bar{B}^u(q^{-1})$
+
+        \item
+        Dependency of sequences on $k$ will be omitted\\
+        e.g. $y$ will refer to $y(k)$
+
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Part 1: Rewrite Dynamics}
+
+    The plant dynamics are
+    \begin{align*}
+        Ay = \qmd Bu + C \epsilon
+    \end{align*}
+    and the Diophantine equation gives
+    \begin{align*}
+        [RA]y = [C - \qmd S] y
+    \end{align*}
+    \paused
+
+    Combining these two equations gives
+    \begin{align*}
+        R [\qmd Bu + C \epsilon] = [C - \qmd S] y
+    \end{align*}
+    \paused
+    \begin{align*}
+        \Rightarrow \quad Cy - \qmd(Sy + BRu) - CR\epsilon = 0
+    \end{align*}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Part 1: Rewrite Dynamics}
+
+    From the previous slide:
+    \begin{align*}
+        \quad Cy - \qmd(Sy + BRu) - CR\epsilon = 0
+    \end{align*}
+
+    \begin{itemize}
+        \item
+        Define $z(k)$ in terms of $y(k)$ and $u(k)$ using
+        \begin{align*}
+            Cz = Sy + BRu
+        \end{align*}
+        (note that we are not necessarily using the optimal control)
+        \pause
+
+        \item
+        Define $\epsilon_f = R\epsilon$
+        \pause
+
+        \item
+        From the top equation,
+        \begin{gather*}
+            Cy - \qmd Cz - C\epsilon_f = 0 \qquad \Rightarrow \qquad C (y - \qmd z - \epsilon_f) = 0
+        \end{gather*}
+        \pause
+        Since $C$ is anti-Schur, we have $y - \qmd z - \epsilon_f \longrightarrow 0$
+        \pause
+
+        \alignbox{
+            y(k) = z(k-\drm) + \epsilon_f(k)
+        }
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Part 2: $E\{z(k-\drm)\epsilon_f(k)\} = 0$}
+
+    \begin{itemize}
+        \item
+        Since $\epsilon(k) = y(k) - E\{y(k) | y(k-1),y(k-2),\ldots\}$, we use least squares property 1 to see that
+        \begin{align*}
+            E \{ y(k-\ell) \epsilon(k+p) \}, \qquad \forall \ell > 0, p \geq 0
+        \end{align*}
+        \paused
+
+        \item
+        $\epsilon_f(k+\drm-1) = \epsilon(k+\drm-1) + r_1 \epsilon(k+\drm-2) + \cdots + r_{\drm-1} \epsilon(k)$
+        \begin{align*}
+            \Rightarrow \quad E \{ y(k-\ell) \epsilon_f(k+\drm-1) \} = 0 \qquad \forall \ell > 0
+        \end{align*}
+        \paused
+
+        \item
+        Since $u(k)$ is a function of $y(k),y(k-1),\ldots$
+        \begin{align*}
+            E \{ u(k-\ell) \epsilon_f(k+\drm-1) \} = 0 \qquad \forall \ell > 0
+        \end{align*}
+        \paused
+
+        \item
+        Since $z(k)$ is a function of $y(k),y(k-1),\ldots$ and $u(k),u(k-1),\ldots$
+        \begin{align*}
+            E \{ z(k-\ell) \epsilon_f(k+\drm-1) \} = 0 \qquad \forall \ell > 0
+        \end{align*}
+        \paused
+
+        \item
+        Choosing $\ell = 1$ completes part 2
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Part 3: Optimal Control}
+
+    Recall that
+    \begin{gather*}
+        y(k) = z(k-\drm) + \epsilon_f(k) \\
+        E\{z(k-\drm)\epsilon_f(k)\} = 0
+    \end{gather*}
+    \paused
+    Therefore,
+    \begin{align*}
+        E\{y^2(k)\} = E\{z^2(k-\drm)\} + E\{\epsilon_f^2(k)\}
+    \end{align*}
+    \paused
+
+    Notes:
+    \begin{itemize}
+        \item
+        At this point, we have only assumed that $u(k)$ stabilizes the system (so that the relevant covariances are bounded)
+        \pause
+
+        \item
+        $E\{\epsilon_f^2(k)\}$ does not depend on the choice of the control law
+        \pause
+
+        \item
+        $\Rightarrow$ We would like to choose $u$ to minimize $E\{z^2\}$
+        \pause
+
+        \item
+        If we can make $E\{z^2\} = 0$, the control must be optimal
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Part 3: Optimal Control}
+
+    Goal: choose $u$ so that $E\{z^2\} = 0$
+    \pause
+
+    \begin{itemize}
+        \item
+        If we apply the control signal $u_*(k)$ defined by
+        \begin{align*}
+            BRu_* = - Sy
+        \end{align*}
+        \paused
+        we have
+        \begin{align*}
+            Cz = BRu_* + Sy = 0
+        \end{align*}
+        \paused
+
+        \item
+        $C(q^{-1})$ is an anti-Schur polynomial $\Rightarrow \ z(k) \longrightarrow 0$.
+        \pause
+
+        \item
+        For this control signal, $E\{z^2\} = 0$, which means that $u_*(k)$ is optimal, provided that the closed-loop system is stable
+        \pause
+
+        \item
+        Also note that $E\{y^2\} = E\{\epsilon_f^2\}$, provided that the closed-loop system is stable
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Part 4: Closed-loop stability}
+
+    From the plant dynamics and feedback law, we have
+    \begin{align*}
+        \begin{bmatrix}
+                A & -\qmd B \\
+                S & BR
+            \end{bmatrix} \begin{bmatrix}
+                y \\
+                u
+            \end{bmatrix} = \begin{bmatrix}
+                C\epsilon \\
+                0
+            \end{bmatrix}
+    \end{align*}
+    \pause
+    \begin{align*}
+        \Rightarrow \begin{bmatrix}
+                y \\
+                u
+            \end{bmatrix} & = \frac{1}{BAR + \qmd BS} \begin{bmatrix}
+                BR & \qmd B \\
+                -S & A
+            \end{bmatrix} \begin{bmatrix}
+                C\epsilon \\
+                0
+            \end{bmatrix} \\
+        & = \frac{1}{B(AR + \qmd S)} \begin{bmatrix}
+                BRC\epsilon \\
+                -SC\epsilon
+            \end{bmatrix} = \frac{1}{BC} \begin{bmatrix}
+                BRC\epsilon \\
+                -SC\epsilon
+            \end{bmatrix}
+    \end{align*}
+    \paused
+
+    Since $C(q^{-1}) B(q^{-1})$ is an anti-Schur polynomial of $q^{-1}$, the closed-loop system is stable
+    \hfill $\blacksquare$
+
+\end{frame}
+

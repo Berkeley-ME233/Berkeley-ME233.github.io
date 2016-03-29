@@ -1,0 +1,49 @@
+\documentclass[mathserif]{beamer}              %use this for creating the presentation
+%\documentclass[handout,mathserif]{beamer}       %use this for creating the handout (i.e. no animation)
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+%\usepackage{subfig}
+
+\usecolortheme{orchid}
+
+\newcommand{\alignbox}[1]
+    {\begin{equation*} \boxed{ \begin{aligned} #1
+    \end{aligned} } \end{equation*}}
+\newcommand{\gatherbox}[1]
+    {\begin{equation*} \boxed{ \begin{gathered} #1
+    \end{gathered} } \end{equation*}}
+\newcommand{\drm}{\textrm{d}}
+\newcommand{\qmd}{q^{-\drm}}
+\newcommand{\paused}{\vspace*{-\baselineskip}\pause}     %use this if \pause puts too much space before the next line
+
+%\input{../commands}
+%\setkeys{Gin}{draft=true}
+
+\linespread{1.3}
+
+\title{ME 233 -- Advanced Control II\\
+    Lecture 19 \\
+    Minimum Variance Regulator}
+\author{Tony Kelman}
+\institute{UC Berkeley}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents
+\end{frame}
+
+\input{1-intro}
+\input{2-problem}
+\input{3-solution}
+\input{4-proof_stablezeros}
+\input{5-acausal}
+\input{6-proof_general}
+
+\end{document} 

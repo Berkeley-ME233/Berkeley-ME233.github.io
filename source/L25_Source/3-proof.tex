@@ -1,0 +1,54 @@
+\section{Stability theorem proof}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Outline of stability theorem proof}
+
+    \begin{enumerate}
+        \item
+        Use hyperstability theory to show that
+        \begin{align*}
+            \lim_{k \rightarrow \infty} e(k) = 0
+        \end{align*}
+        \pause
+
+        \item
+        Prove the limits
+        \begin{gather*}
+            \lim_{k \rightarrow \infty} \| \hat{\theta}_c(k) - \hat{\theta}_c(k-1) \| = 0 \\
+            \lim_{k \rightarrow \infty} \frac{ [\lambda_1(k-1) e^o(k)]^2 }
+                { \lambda_1(k-1) + \phi^T(k-\drm) F(k-1) \phi(k-\drm) } = 0 \\
+            \lim_{k \rightarrow \infty} \frac{ [\lambda_1(k-1) \epsilon(k)]^2 }
+                { \lambda_1(k-1) + \phi^T(k-\drm) F(k-1) \phi(k-\drm) } = 0
+        \end{gather*}
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Outline of stability theorem proof}
+
+    \begin{enumerate}
+        \item[3.]
+        Prove that there exist $C_1 \geq 0, \ C_2 \geq 0$ such that
+        \begin{align*}
+            \| \phi(k-\drm) \| \leq C_1 + C_2 \max_{j \in \{0,\ldots,k\}} |\epsilon(j)|
+        \end{align*}
+        \pause
+
+        \item[4.]
+        Prove Goodwin's technical lemma, which states that $\| \phi(k) \|$ remains bounded and
+        \begin{align*}
+            \lim_{k \rightarrow \infty} \epsilon(k) = 0
+        \end{align*}
+        
+        \item[5.]
+        Prove that
+        \begin{align*}
+            \lim_{k \rightarrow \infty} e^o(k) = 0
+        \end{align*}
+
+    \end{enumerate}
+\end{frame} 

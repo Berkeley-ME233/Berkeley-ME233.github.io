@@ -1,0 +1,209 @@
+\subsection{Part 4}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Stability theorem proof, part 4}
+
+    We want to prove Goodwin's technical lemma, which states that $\| \phi(k) \|$ remains bounded and
+    \begin{align*}
+        \lim_{k \rightarrow \infty} \epsilon(k) = 0
+    \end{align*}
+    \pause
+
+    This proof will be done in three steps:
+    \begin{enumerate}
+        \item
+        Show that $\epsilon(k)$ remains bounded
+        
+        \item
+        Show that $\| \phi(k) \|$ remains bounded
+        
+        \item
+        Show that $\epsilon(k) \longrightarrow 0$
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Stability theorem proof, part 4, step 1 ($\epsilon(k)$ bounded)}    
+
+    Recall from part 2 that
+    \begin{align*}
+        \lim_{k \rightarrow \infty} \frac{ [\lambda_1(k-1) \epsilon(k)]^2 }
+            { \lambda_1(k-1) + \phi^T(k-\drm) F(k-1) \phi(k-\drm) } = 0
+    \end{align*}
+    \pause
+    
+    Since $0 < \underline{\lambda}_1 \leq \lambda_1(k) \leq 1$ \\
+    and $0 < \lambda_{min}(F(k-1)) \leq \lambda_{max}(F(k-1)) \leq K_{max}$ \\
+    we have
+    \begin{multline*}
+        \left| \frac{ [\lambda_1(k-1) \epsilon(k)]^2 }
+            { \lambda_1(k-1) + \phi^T(k-\drm) F(k-1) \phi(k-\drm) } \right| \\
+        \geq \frac{ \underline{\lambda}_1^2 \epsilon^2(k) }{ 1 + K_{max} \| \phi(k-\drm) \|^2 } > 0
+    \end{multline*}
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Stability theorem proof, part 4, step 1 ($\epsilon(k)$ bounded)}
+    
+    \begin{multline*}
+        \left| \frac{ [\lambda_1(k-1) \epsilon(k)]^2 }
+            { \lambda_1(k-1) + \phi^T(k-\drm) F(k-1) \phi(k-\drm) } \right| \\
+        \geq \frac{ \underline{\lambda}_1^2 \epsilon^2(k) }{ 1 + K_{max} \| \phi(k-\drm) \|^2 } > 0
+    \end{multline*}
+    \hrule{\hfill}
+
+    For convenience, we define $\displaystyle \overline{\epsilon}(k) \ \max_{j\leq k} |\epsilon(j)|$
+    \pause
+    
+    $\, $
+    
+    From part 3, we have that $\| \phi(k-\drm) \|^2 \leq [C_1 + C_2 \overline{\epsilon}(k)]^2$, which implies that
+    \begin{multline*}
+        \left| \frac{ [\lambda_1(k-1) \epsilon(k)]^2 }
+            { \lambda_1(k-1) + \phi^T(k-\drm) F(k-1) \phi(k-\drm) } \right| \\
+        \geq \frac{ \underline{\lambda}_1^2 \epsilon^2(k) }{ 1 + K_{max} [C_1 + C_2 \overline{\epsilon}(k)]^2 } > 0
+    \end{multline*}    
+
+    
+\end{frame} 
+
+\begin{frame}
+    \frametitle{Stability theorem proof, part 4, step 1 ($\epsilon(k)$ bounded)}
+
+    \begin{multline*}
+        \left| \frac{ [\lambda_1(k-1) \epsilon(k)]^2 }
+            { \lambda_1(k-1) + \phi^T(k-\drm) F(k-1) \phi(k-\drm) } \right| \\
+        \geq \frac{ \underline{\lambda}_1^2 \epsilon^2(k) }{ 1 + K_{max} [C_1 + C_2 \overline{\epsilon}(k)]^2 } > 0
+    \end{multline*}
+    \hrule{\hfill}
+        
+    Since 
+    \begin{align*}
+        \lim_{k \rightarrow \infty} \frac{ [\lambda_1(k-1) \epsilon(k)]^2 }
+            { \lambda_1(k-1) + \phi^T(k-\drm) F(k-1) \phi(k-\drm) } = 0
+    \end{align*}
+    we have
+    \begin{align*}
+        \lim_{k \rightarrow \infty} \frac{ \underline{\lambda}_1^2 \epsilon^2(k) }
+            { 1 + K_{max} [C_1 + C_2 \overline{\epsilon}(k)]^2 } = 0
+    \end{align*}
+
+\end{frame} 
+
+\begin{frame}
+    \frametitle{Stability theorem proof, part 4, step 1 ($\epsilon(k)$ bounded)}
+
+    \begin{align*}
+        \lim_{k \rightarrow \infty} \frac{ \underline{\lambda}_1^2 \epsilon^2(k) }
+            { 1 + K_{max} [C_1 + C_2 \overline{\epsilon}(k)]^2 } = 0
+    \end{align*}
+    \hrule{\hfill}
+
+    Whenever $\displaystyle |\epsilon(k)| = \overline{\epsilon}(k) \geq 1$, we have
+    \begin{align*}
+        0 & < \frac{ 1 + K_{max} [C_1 + C_2 \overline{\epsilon}(k)]^2 }{ \underline{\lambda}_1^2 \overline{\epsilon}^2(k) } \\
+        & = \frac{ 1 + K_{max} C_1^2 }{ \underline{\lambda}_1^2 \overline{\epsilon}^2(k) }
+            + \frac{ 2 K_{max} C_1 C_2 }{ \underline{\lambda}_1^2 \overline{\epsilon}(k) } 
+            + \frac{ K_{max} C_2^2 }{ \underline{\lambda}_1^2 } \\
+        & \leq \frac{1}{\underline{\lambda}_1^2 } [1 + K_{max} C_1^2 + 2 K_{max} C_1 C_2 + K_{max} C_2^2]
+    \end{align*}
+    \paused
+    
+    This implies that whenever $\displaystyle |\epsilon(k)| = \overline{\epsilon}(k) \geq 1$, we have
+    \begin{align*}
+        \frac{ \underline{\lambda}_1^2 \epsilon^2(k) }{ 1 + K_{max} [C_1 + C_2 \overline{\epsilon}(k)]^2 } 
+            \geq \frac{ \underline{\lambda}_1^2 }{ 1 + K_{max} [C_1 + C_2]^2 } > 0
+    \end{align*}
+
+\end{frame} 
+
+\begin{frame}
+    \frametitle{Stability theorem proof, part 4, step 1 ($\epsilon(k)$ bounded)}
+
+    Whenever $\displaystyle |\epsilon(k)| = \overline{\epsilon}(k) \geq 1$, we have
+    \begin{align*}
+        \frac{ \underline{\lambda}_1^2 \epsilon^2(k) }{ 1 + K_{max} [C_1 + C_2 \overline{\epsilon}(k)]^2 }
+            \geq \frac{ \underline{\lambda}_1^2 }{ 1 + K_{max} [C_1 + C_2]^2 } > 0
+    \end{align*}
+    \hrule{\hfill}
+    
+    Since
+    \begin{align*}
+        \lim_{k \rightarrow \infty} \frac{ \underline{\lambda}_1^2 \epsilon^2(k) }
+            { 1 + K_{max} [C_1 + C_2 \overline{\epsilon}(k)]^2 } = 0
+    \end{align*}
+    there can only be a finite number of values of $k$ such that $\displaystyle |\epsilon(k)| = \overline{\epsilon}(k) = \max_{j\leq k} |\epsilon(j)| \geq 1$.
+    \pause
+    
+    $\,$
+    
+    Therefore, 
+    \alignbox{
+        \epsilon(k) \textrm{ remains bounded}
+    }
+    
+\end{frame}
+
+\begin{frame}
+    \frametitle{Stability theorem proof, part 4, step 2 ($\phi(k)$ bounded)}
+
+    Recall from part 3 that
+    \begin{align*}
+        \| \phi(k-\drm) \| & \leq C_1 + C_2 \max_{j \leq k} |\epsilon(j)|
+    \end{align*}
+    \pause
+    
+    Since $\epsilon(k)$ remains bounded, we immediately see that
+    \alignbox{
+        \phi(k) \textrm{ remains bounded}
+    }
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Stability theorem proof, part 4, step 3 ($\epsilon(k) \longrightarrow 0$)}
+
+    Recall from part 2 that
+    \begin{align*}
+        \lim_{k \rightarrow \infty} \frac{ \epsilon^2(k) }{ \zeta(k) } = 0
+    \end{align*}
+    where
+    \begin{align*}
+        \zeta(k) = \frac{\lambda_1(k-1) + \phi^T(k-\drm) F(k-1) \phi(k-\drm)}{\lambda_1^2(k-1)}
+    \end{align*}
+    \pause
+    
+    Therefore, if we can show that $\zeta(k)$ remains bounded, it must be true that $\epsilon(k) \longrightarrow 0$
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Stability theorem proof, part 4, step 3 ($\epsilon(k) \longrightarrow 0$)}
+
+    Since $0 < \underline{\lambda}_1 \leq \lambda_1(k) \leq 1$ \\
+    and $0 < \lambda_{min}(F(k-1)) \leq \lambda_{max}(F(k-1)) \leq K_{max}$ \\
+    we have
+    \begin{align*}
+        |\zeta(k)| & = \left| \frac{\lambda_1(k-1) + \phi^T(k-\drm) F(k-1) \phi(k-\drm)}{\lambda_1^2(k-1)} \right| \\
+        & \leq \frac{ 1 + K_{max} \| \phi(k-\drm) \|^2 }{ \underline{\lambda}_1^2 }
+    \end{align*}
+    \pause
+    
+    Since the right-hand side is bounded, we see that $\zeta(k)$ remains bounded.
+    \pause
+    
+    Therefore
+    \alignbox{
+        \lim_{k \rightarrow \infty} \epsilon(k) = 0
+    }
+
+\end{frame}
+
+
+
+

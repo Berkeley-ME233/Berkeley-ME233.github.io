@@ -1,0 +1,31 @@
+\section{Stability theorem}
+\begin{frame}
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}
+    \frametitle{Stability theorem}
+
+    Using the direct adaptive control approach just outlined, the tracking error converges to zero, i.e.
+    \alignbox{
+        \lim_{k \rightarrow \infty} \epsilon(k) = 0
+    }
+    Moreover, $u(k)$ remains bounded, $e(k) \longrightarrow 0$, and $e^o(k)\longrightarrow 0$.
+    \pause
+
+    Note that the theorem \underline{does not} require:
+    \begin{itemize}
+        \item
+        a-priori knowledge that the control input sequence $u(k)$ is bounded
+
+        \item
+        the polynomial $A(q^{-1})$ is anti-Schur
+
+        \item
+        any sort of persistence of excitation condition
+    \end{itemize}
+    \pause
+
+    The theorem \underline{does not} state that the parameter estimates converge to the true values
+\end{frame} 
