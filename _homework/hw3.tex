@@ -1,0 +1,348 @@
+\documentclass[letterpaper,12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[dvips]{graphicx}
+%\usepackage{subfig}
+\usepackage[margin=2.5cm,nohead]{geometry}
+\usepackage{url}
+\usepackage{verbatim}
+
+%\input{../commands}
+%\setkeys{Gin}{draft=true}
+%
+%\newtheorem{thm}{Theorem}%[subsection]
+%\newtheorem{lem}[thm]{Lemma}
+%\newtheorem{cor}[thm]{Corollary}
+%\newtheorem{prop}[thm]{Proposition}
+%\newtheorem{remark}[thm]{Remark}
+%\newtheorem*{thm*}{Theorem}
+%\newtheorem*{lem*}{Lemma}
+
+
+
+\begin{document}
+
+\begin{center}
+    {\bf UNIVERSITY OF CALIFORNIA AT BERKELEY}\\
+    {\bf Department of Mechanical Engineering}\\
+    {\bf ME233  Advanced Control Systems II}\\
+    Spring 2016\\
+\end{center}
+\noindent
+{\Large \bf Homework \#3 }\\[-3em]
+\begin{flushright}
+\begin{tabular} {l l}
+    Assigned: &  Mar.\ 2 (Wed)\\
+    Due: & Mar.\ 8 (Tu)
+\end{tabular}
+\end{flushright}
+
+\begin{enumerate}
+
+
+
+\item
+In this problem we will verify some results concerning the convergence of the LQR's discrete Riccati equation (DRE) to a steady state solution and the existence, uniqueness and closed loop stability of the discrete algebraic Riccati equation (DARE) solution.
+
+
+Consider the design of an optimal LQR for the LTI discrete-time system
+\begin{align}
+    \label{abc1}
+    x(k+1) & = A \: x(k) + B \: u(k) \\
+    y(k) & = C \: x(k) \, \nonumber
+\end{align}
+where $u(k) = -K(k+1) \: x(k)$ is the optimal control input that minimizes the following cost criteria
+\begin{align*}
+    %\label{cost1}
+    J[x_o, m, Q_{_f},N] = x^T(N)\, Q_{_f} \, x(N) + \sum_{k=m}^{N-1} \: \left \{ y^2(k) + R\,u^2(k) \right \}
+        \quad \textrm{s.t.} \quad x(m) = x_o\,,
+\end{align*}
+for $m = 0$, $Q_{_f} = Q_{_f}^T \succeq 0$ and $R = R^T \succ 0$, and any arbitrary initial condition $x_o \in \mathcal{R}^n$.
+
+Define the optimal value function
+\begin{align*}
+    J^o[x_o, m, Q_{_f},N] = \min_{U_{[m,N-1]}} \, J[x_o, m, Q_{_f},N]
+\end{align*}
+where $U_{[m,N-1]} = \left \{ u(m),\, \cdots , \, u(N-1)\right \}$ is the set of all possible control actions from $k=m$ to $k=N-1$.
+
+\begin{enumerate}
+
+\item
+\label{case:a}
+Let
+\begin{align*}
+    A = \begin{bmatrix}
+            1.2  & 0 & 0 \\
+            0 & 0 & 1 \\
+            0 & -2 & 0
+        \end{bmatrix} \hspace{2em}
+        B = \begin{bmatrix}
+            1 & 0 \\
+            0 & 0 \\
+            0 & 1 \end{bmatrix} \hspace{2em}
+        C = \begin{bmatrix}
+            10 & 0 & 0
+        \end{bmatrix} \hspace{2em} R = \begin{bmatrix}
+            10 & 0 \\
+            0 & 10
+        \end{bmatrix}
+\end{align*}
+and verify that $(A,B)$ is stabilizable but $(C,A)$ is not detectable. Let $P(N) = Q_{_f}$. For each of the four cases
+\begin{enumerate}
+    \item $Q_{_f} = 0$
+    \item $Q_{_f} = {\rm diag}(0,\,0,\,1)$,
+    \item $Q_{_f} = {\rm diag}(1,\,1,\,1)$,
+    \item $Q_{_f} = {\rm diag}(10,\,1,\,1)$,
+\end{enumerate}
+do the following:
+
+\begin{itemize}
+    \item
+    For $x_o = [1 \ \ 0 \ \ 1]^T$, plot $J^o[x_o, N - m, Q_{_f}, N] $  vs $m$. (Note that this will require computing $P(k)$, the solution of the Riccati difference equation, backwards from $P(50) = Q_{_f}$.)
+
+    \item
+    Compute the solution of the DARE %using the MATLAB command {\tt dare}
+symbolically in terms of unknown elements of $P_\infty$
+and compare it with values of $P(0)$ and $P(1)$.
+
+\end{itemize}
+Discuss your results.
+
+
+%\item
+%Let
+%\begin{align*}
+%    A = \begin{bmatrix}
+%            1.2  & 1 & 0 \\
+%            0 & 0 & 1 \\
+%            0 & -2 & 0
+%        \end{bmatrix}
+%\end{align*}
+%and everything else be the same as in part (a). Repeat part (a) %for the two cases
+%\begin{enumerate}
+%    \item $Q_{_f} = 0$
+%    \item $Q_{_f} = {\rm diag}(0,\,0,\,1)$.
+%\end{enumerate}
+%Discuss your results.
+
+\item
+Let
+\begin{align*}
+    A & = \begin{bmatrix}
+            0.8 & 1 & 1 \\
+            0 & -1 & 1 \\
+            0 & 0 & -1
+        \end{bmatrix}
+        & B & = \begin{bmatrix}
+            0 \\
+            0 \\
+            1
+        \end{bmatrix}
+        & C & = \begin{bmatrix}
+            0 & 1 & 0
+        \end{bmatrix}
+        & R & = 0.1 \; .
+\end{align*}
+Repeat part (a) for the two cases
+
+\begin{enumerate}
+    \item $Q_{_f} = 0$
+    \item $Q_{_f} = {\rm diag}(0,\,0,\,1)$.
+\end{enumerate}
+Discuss your results.
+
+\end{enumerate}
+
+
+
+
+
+\item
+
+Consider the system
+\begin{align*}
+    \begin{bmatrix}
+            x_1(k+1) \\
+            x_2(k+1)
+        \end{bmatrix} & = \begin{bmatrix}
+            -0.08 & -1 \\
+            0.7 & 0.1
+        \end{bmatrix} \begin{bmatrix}
+            x_1(k) \\
+            x_2(k)
+        \end{bmatrix} + \begin{bmatrix}
+            0.34 \\
+            0.3
+        \end{bmatrix} (u(k) + w(k)) \\
+    y(k) & = \begin{bmatrix}
+            0 & 3
+        \end{bmatrix} \begin{bmatrix}
+            x_1(k) \\
+            x_2(k)
+        \end{bmatrix} + v(k)
+\end{align*}
+where $u(k)$ is a deterministic input and
+\begin{itemize}
+    \item
+    $E \{ X(0) \} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}$ and $E \{ X(0) X^T(0) \} = \begin{bmatrix} 0.1 & 0 \\ 0 & 0.1 \end{bmatrix}$
+
+    \item
+    $X(0)$ is Gaussian and $W(k)$ and $V(k)$ are white Gaussian sequences
+
+    \item
+    $m_{w} = E \{ W(k) \} = 10, \quad E \{ V(k) \} = 0$
+
+    \item
+    $E \left\{ \begin{bmatrix}
+        W(k+j) - m_w  \\
+        V(k+j)
+    \end{bmatrix} \begin{bmatrix}
+        (W(k) - m_w) &
+        V(k)
+    \end{bmatrix} \right\} = \begin{bmatrix}
+        W & 0 \\
+        0 & V
+    \end{bmatrix} \delta(j) = \begin{bmatrix}
+        1 & 0 \\
+        0 & 0.5
+    \end{bmatrix} \delta(j)$
+
+    \item
+    $E \left\{ \begin{bmatrix}
+        W(k) - m_w  \\
+        V(k)
+    \end{bmatrix} X^T(0) \right\} = 0$
+
+\end{itemize}
+A Kalman filter is used to estimate the state of the system using the measurement sequence $y(k)$.
+
+\begin{enumerate}
+
+    \item
+    Find the steady state values of the following time varying matrices and scalars:
+    \begin{itemize}
+
+        \item
+        The a priori state estimation error covariance $M(k)$
+
+        \item
+        The a posteriori state estimation error covariance $Z(k)$
+
+        \item
+        The a priori output estimation error covariance
+        \begin{align*}
+            \Lambda_{\tilde{y}^o \tilde{y}^o}(k,0) = E \{ | \tilde{y}^o(k) |^2 \} = CM(k) C^T + V \; .
+        \end{align*}
+
+        \item
+        The Kalman filter gains $L(k)$ and $F(k)$
+
+    \end{itemize}
+    You should find the steady state values of these quantities by recursively computing their values forwards in time until they converge to their respective steady state values.
+
+    \item
+    Plot the response of $\Lambda_{\tilde{y}^o \tilde{y}^o}(k,0)$.
+\end{enumerate}
+%\balphlist
+%\item
+%Starting from the initial conditions, recursively compute the following time varying matrices and scalars, until their respective steady state values are reached:
+%\bitem
+%\item
+%The a-priori and a-posteriori state estimation error covariances, respectively $M(k)$ and $Z(k)$.
+%\item
+%The  a-priori and a-posteriorly output estimation error covariances, respectively
+%\footnote{The a-priori output estimation error $\yt^o(k) = y(k) - \yh^o(k)$ is often called the {\em innovation sequence}.}
+%\beqns
+%\Lambda_{\yt^o \yt^o }(k) &=& E \{ |\yt^o(k)|^2\} = C M(k) C^T + V,\:\:\:
+%\yt^o(k) = y(k) - \yh^o(k)\\
+%\Lambda_{\yt  \yt  }(k) &=& E \{ |\yt (k)|^2\} = C Z(k) C^T - V
+%+ 2V[CM(k) C +V]^{-1} V,\:\:\:\\\yt(k) &=& y(k) - \yh(k)\\
+%\eeqns
+%%\item
+%%The Kalman filter feedback gains $L(k) =  A M(k) C^T   [ C M(k) C^T + R ] ^{-1}$  and $F(k) = M(k) C^T   [ C M(k) C^T + R ] ^{-1}$
+%%\footnote{$F(k)$ is often called the innovation gain.}.
+%%\noindent
+%\eitem
+%
+%\item Plot the response of $\Lambda_{\yt^o \yt^o }(k)$.
+
+
+%\item
+%Compute the steady state covariances $M$, $Z$, $\Lambda_{\yt^o \yt^o }$ and $\Lambda_{\yt  \yt  }$, and Kalman filter gains $L$ and $F$ by solving the algebraic Riccati equation
+%\beqns
+%A M A^T  - M +   B W B^{T}   - A  M  C^T
+%    \left [  C M  C^T + V \right ]^{-1}  C M  A^T  = 0
+%\eeqns
+%using either the Matlab commands {\tt dare} or {\tt kalman}. Read the Matlab help entries on these functions to understand what they do. Also compute the close loop eigenvalues $A_c = A - L C$.
+%\item
+%Perform a simulation by running the plant and the {\bf steady state} Kalman filter (i.e. only use the steady state Kalman filter gains $L$ and $F$)
+%\footnote{Notice that the steady state Kalman filter is returned as the first output argument of the matlab function {\tt kalman}.} for a sufficiently long period of time, so that expected values and covariances can be approximated by time averages. Use $u(k) = 10$ as the deterministic input and generate a set of sample outcomes $x(0)$, $w(k)$ and $v(k)$.
+%\item
+%From the resulting simulation data, calculate, using the function  {\tt cov}, the approximate steady state values of $\Lyy$, $\Lambda_{\yt^o  \yt^o  }$ and $\Lambda_{\yt  \yt  }$, and compare them with their actual values, which were previously calculated.
+%\item Repeat steps (a)-(e) but change the measurement noise intensity as follows i) $V = 0.05$, ii) $V = 5$. Discuss your results for all three cases.
+
+
+
+
+
+\item
+{\bf Kalman filter with correlated input and measurement noise:}
+
+Consider the discrete-time system given by
+\begin{align}
+    x(k+1) & = A x(k) + B u(k) + w(k)
+        \label{ds1} \\
+    y(k) & = C x(k) + v(k)
+        \label{ds2}
+\end{align}
+where $E \{x(0)\} = x_o$, $E\{ w(k) \} = 0$, $E\{v(k)\} = 0$, $E \{ (x(0) - x_o)(x(0) - x_o)^T \} = X_o$, $E\{ (x(0) - x_o) w^T(k) \} = 0$, $E \{(x(0) - x_o) v^T(k) \} = 0$, and
+\begin{align*}
+    E \left \{ \begin{bmatrix}
+            w(k) \\
+            v(k)
+        \end{bmatrix} \begin{bmatrix}
+            w(j)^T & v(j)^T
+        \end{bmatrix} \right \} = \begin{bmatrix}
+            W & S \\
+            S^T & V
+        \end{bmatrix} \, \delta(k-j)
+\end{align*}
+%and $W \in \mathbb{R} ^{n \times n}$ is a positive semi-definite matrix
+where $V \in \mathbb{R} ^{m \times m}$ is positive definite matrix. The a-priori Kalman filter for this system can be written as
+\begin{align}
+    \hat{x}^o(k+1) & = A \hat{x}^o(k) + B u(k) + L(k) [ y(k) - C \hat{x}^o(k) ]
+        \label{kf-1} \\
+    L(k) & = [ A M(k) C^T + S ] [ C M(k) C^T + V ] ^{-1}\\
+    M(k+1) & = A M(k) A^T + W - [AM(k) C^T + S] [ C M(k) C^T + V ]^{-1} [CM(k) A^T + S^T]
+        \label{kf-3}
+\end{align}
+with initial conditions $\hat{x}^o(0) = x_o$ and $M(0) = X_o$.
+
+Derive Eqs.~\eqref{kf-1}--\eqref{kf-3} using previously-derived results in Kalman filtering and noticing that Eqs.~\eqref{ds1}--\eqref{ds2} can be written as
+\begin{align*}
+    x(k+1) & = A^{'} x(k) + B u(k) + w^{'}(k) + SV^{-1} y(k) \, ,
+\end{align*}
+where $A^{'} = A - SV^{-1}C$ and
+\begin{align*}
+    E \left \{ \begin{bmatrix}
+            w^{'}(k) \\
+            v(k)
+        \end{bmatrix} \begin{bmatrix}
+            w^{'}(j)^T & v(j)^T
+        \end{bmatrix} \right \} = \begin{bmatrix}
+            W^{'} & 0 \\
+            0 & V
+        \end{bmatrix} \, \delta(k-j),\hspace{3em}W^{'} = W - S V^{-1} S^T \; .
+\end{align*}
+
+
+
+
+\end{enumerate}
+
+
+\end{document}
+
+
+
