@@ -1,0 +1,10 @@
+\item
+When designing an infinite-horizon LQR for the discrete-time system
+\begin{align*}
+    x(k+1) & = Ax(k) + Bu(k)
+\end{align*}
+under the cost function
+\begin{align*}
+    J = \sum_{k=0}^\infty p^T(k) p(k)
+\end{align*}
+where $p(k) = Cx(k) + Du(k)$ and $D^T D$ is invertible, we can guarantee that the optimal solution exists provided that $(A,B)$ is stabilizable and a condition involving the transmission zeros of the state space realization $C (zI-A)^{-1} B + D$ holds. Using the result of problem 1, show that when $C^T D = 0$, the transmission zeros of the state space realization $C (zI-A)^{-1} B + D$ are the unobservable modes of $(C,A)$. 

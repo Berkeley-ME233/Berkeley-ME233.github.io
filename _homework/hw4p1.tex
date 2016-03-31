@@ -1,0 +1,68 @@
+\item
+Consider the state-space realization $G(z)= C(zI-A)^{-1}B + D$, where $D^T D$ is invertible. Assume that the dimensions of the matrices are given by $A \in \mathcal{R}^{n_x \times n_x}$, $B \in \mathcal{R}^{n_x \times n_u}$, $C \in \mathcal{R}^{n_y \times n_x}$, and $D \in \mathcal{R}^{n_y \times n_u}$. In this problem, we will establish the relationship between the transmission zeros of this realization and the unobservable modes of $(\hat{C},\hat{A})$, where
+\begin{align*}
+    \hat{A} & = A - B (D^T D)^{-1} D^T C \\
+    \hat{C} & = C - D (D^T D)^{-1} D^T C \; .
+\end{align*}
+
+\begin{enumerate}
+
+\item
+Show that, for any matrix $M$, the columns of the matrix $X$ are linearly independent if and only if the columns of the matrix
+\begin{align*}
+    Z := \begin{bmatrix}
+            I \\
+            M
+        \end{bmatrix} X
+\end{align*}
+are linearly independent
+
+\textbf{Hint:} A good way to start is by showing that the null space of $X$ is equal to the null space of $Z$.
+
+
+
+\item
+Using the result from part (a), prove that the following conditions are equivalent:
+\begin{itemize}
+    \item
+    $\begin{bmatrix} \hat{A} - \lambda I \\ \hat{C} \end{bmatrix} X = 0$ and the columns of $X$ are linearly independent
+
+    \item
+    $\exists Y$ such that $\begin{bmatrix} A - \lambda I & B \\ C & D \end{bmatrix} \begin{bmatrix} X \\ Y \end{bmatrix} = 0$ and the columns of $\begin{bmatrix} X \\ Y \end{bmatrix}$ are linearly independent
+
+\end{itemize}
+
+
+
+\item
+Using the result from part (b), prove that
+\begin{align*}
+    \textrm{nullity} \begin{bmatrix}
+            A - \lambda I & B \\
+            C & D
+        \end{bmatrix} = \textrm{nullity} \begin{bmatrix}
+            \hat{A} - \lambda I \\
+            \hat{C}
+        \end{bmatrix}, \qquad \forall \lambda \in \mathcal{C} \; .
+\end{align*}
+
+
+
+\item
+Using the result from part (c), find the relationship between the transmission zeros of the state-space realization $G(z)= C(zI-A)^{-1}B + D$ and the unobservable modes of $(\hat{C},\hat{A})$.
+
+\textbf{Hint:} First convert the condition in part (b) into a condition relating the rank of the two matrices. Then show that
+\begin{align*}
+    \textrm{rank} \begin{bmatrix}
+            A - \lambda I & B \\
+            C & D
+        \end{bmatrix} < \textrm{normalrank} \begin{bmatrix}
+            A - \lambda I & B \\
+            C & D
+        \end{bmatrix} \quad \Leftrightarrow \quad \textrm{rank} \begin{bmatrix}
+            \hat{A} - \lambda I \\
+            \hat{C}
+        \end{bmatrix} < n_x \; .
+\end{align*}
+
+\end{enumerate} 

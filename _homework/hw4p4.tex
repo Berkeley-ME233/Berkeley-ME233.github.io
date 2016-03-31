@@ -1,0 +1,64 @@
+\item
+Define the matrices
+\begin{align*}
+    A_e & := \begin{bmatrix}
+            A & 0 & 0 \\
+            B_1 & A_1 & 0 \\
+            0 & 0 & A_2
+        \end{bmatrix} 
+        & B_e & := \begin{bmatrix}
+            B \\
+            0 \\
+            B_2
+        \end{bmatrix} \\
+    C_e & := \begin{bmatrix}
+            D_1 & C_1 & 0 \\
+            0 & 0 & C_2
+        \end{bmatrix}
+        & D_e & := \begin{bmatrix}
+            0 \\
+            D_2
+        \end{bmatrix}
+\end{align*}
+For the frequency-shaped linear quadratic regulator (FSLQR) problem considered in the first half of Lecture 15, we derived the following set of conditions that guarantee the existence of the optimal FSLQR:
+
+$\,$
+
+\begin{tabular}{p{0.5cm}p{14cm}}
+    \textbf{A1:} & $(A_e,B_e)$ is stabilizable \\
+    \textbf{A2:} & The state space realization $C_e (zI - A_e)^{-1} B_e + D_e$ has no transmission zeros on the unit circle.
+\end{tabular}
+
+$\,$
+
+It was subsequently stated (but not proved) that the following conditions imply that (A1)--(A2) hold:
+
+$\,$
+
+\begin{tabular}{p{0.5cm}p{14cm}}
+    \textbf{B1:} 
+        & $(A,B)$ is stabilizable \\
+    \textbf{B2:} 
+        & $A_1$ and $A_2$ are Schur \\
+    \textbf{B3:}
+        & nullity$\begin{bmatrix} A_2 - \lambda I & B_2 \\ C_2 & D_2 \end{bmatrix} = 0$ whenever $|\lambda| = 1$ \\
+    \textbf{B4:}
+        & nullity$\begin{bmatrix} A_1 - \lambda I & B_1 \\ C_1 & D_1 \end{bmatrix} = 0$ whenever $\lambda$ is a unit circle eigenvalue of $A$
+\end{tabular}
+
+$\,$
+
+Prove that conditions (B1)--(B4) imply conditions (A1)--(A2).
+
+\textbf{Hint:}
+You will find it useful to use the following characterizations:
+
+\begin{itemize}
+    \item
+    $(A,B)$ is stabilizable if and only if nullity$\begin{bmatrix} A^T - \lambda I \\ B^T \end{bmatrix} = 0$ whenever $|\lambda| \geq 1$
+    
+    \item
+    $\lambda$ is a transmission zero of the realization $C_e (zI - A_e)^{-1} B_e + D_e$ if and only if nullity$\begin{bmatrix} A_e - \lambda I & B_e \\ C_e & D_e \end{bmatrix} > 0$
+\end{itemize}
+
+The second characterization is a result of $D_e^T D_e = D_2^T D_2 \succ 0$ holding for the FSLQR problem. 

@@ -1,0 +1,78 @@
+\item
+Consider a discrete-time process described by
+\begin{align*}
+    x(k+1) = Ax(k) + Bu(k) + B_w w(k)
+\end{align*}
+where the stationary, Gaussian white noise $w \in \mathcal{R}^s$ satisfies
+\begin{align*}
+    E \{ w(k) \} = 0, \qquad  E \{ w(k+j) w^T (k) \} = W \delta(j) \; .
+\end{align*}
+The signals $x$ and $u$ respectively have dimension $n$ and $m$. 
+%Assume also that the initial condition is Gaussian and satisfies
+%\begin{align*}
+%    E\{ x(0) \} & = x_o,
+%        &  E\{(x(0) - x_o)(x(0) - x_o)^T\} & = X_o,
+%        & E \{ (x(0) - x_o) w^T(k) \} & = 0 \; .
+%\end{align*}
+
+There are two sensors configurations we will be considering.
+\begin{description}
+    \item[Sensor Configuration A:]
+    In this configuration, the output equation is
+    \begin{align*}
+        y(k) = C x(k) + v_A(k)
+    \end{align*}
+    where $y \in \mathcal{R}^r$ is  output vector and $v_A \in \mathcal{R}^r$ is a stationary Gaussian measurement noise.  The measurement noise is independent from the initial state and input noise, and the following quantities are given
+    \begin{align*}
+        E \{ v_A(k) \} = 0,\hspace{2em} E \{ v_A(k+j) v_A^T(k) \} = V_A \delta(j) \; .
+    \end{align*}
+
+    \item[Sensor Configuration B:]
+    For the purpose of preparing for any sensor failures, this configuration uses two identical sets of sensors and measures the output twice. With this sensor configuration the measurement vector is $2r$ dimensional, and it is given by
+    \begin{align*}
+        \begin{bmatrix}
+                y_1(k) \\
+                y_2(k)
+            \end{bmatrix} = \begin{bmatrix}
+                C \\
+                C
+            \end{bmatrix} x(k) + \begin{bmatrix}
+                v_{B1}(k) \\
+                v_{B2}(k)
+            \end{bmatrix}
+    \end{align*}
+    where the measurement noises are independent from the initial state and the input noise, and the following quantities are given for $i = 1,2$:
+    \begin{align*}
+        E \{ v_{Bi}(k) \} & = 0,
+            & E \{ v_{Bi}(k+j) v_{Bi}^T(k) \} & = V_B \delta(j),
+            & E \{ v_{B1}(k+j) v_{B2}^T(k) \} & = 0
+    \end{align*}
+
+\end{description}
+
+While the duplication of the output measurement increases the hardware cost in Sensor Configuration B, it is also true that the specification for each sensor may be relaxed if the same output is measured twice and the two measurements are  used in the Kalman filter.
+
+\begin{enumerate}
+    \item
+    List a set of conditions that guarantee that the stationary Kalman filter exists for Sensor Configuration A. Show that these conditions also guarantee that the stationary Kalman filter exists for Sensor Configuration B. (Do not assume that $A$ is Schur.)
+    
+    \item
+    Let the assumptions you listed in part (a) hold and assume that you design and use a Kalman filter for each sensor configuration. Determine a relationship between the sensor noise covariances $V_A$ and $V_B$ so that $M_A = M_B$, where $M_A$ is the steady state a-priori state estimation error covariance for Sensor Configuration A, and $M_B$ is the steady state a-priori state estimation error covariance for Sensor Configuration B.
+    
+    \textbf{Hint:} The following relationships for stationary Kalman filters are helpful in solving this problem:
+    \begin{itemize}
+        \item
+        $(I + MC^T V^{-1} C)^{-1} = I - MC^T (CMC^T + V)^{-1} C$
+        
+        \item
+        $A - LC = A \left[ I - MC^T (CMC^T + V)^{-1} C \right]$
+        
+        \item
+        $M = (A-LC)MA^T + B_w W B_w^T$
+
+    \end{itemize}
+    The first relationship comes from the matrix inversion lemma, the second relationship expresses $A-LC$ as a function of $M$, and the third relationship is a restatement of the discrete algebraic Riccati equation.
+
+\end{enumerate}
+
+
